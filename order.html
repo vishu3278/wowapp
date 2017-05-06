@@ -2,28 +2,44 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Ratchet template page</title>
+    <title>MMSApp Order Page</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="stylesheet" href="css/ratchet.css">
-    <link rel="stylesheet" href="css/mobile.css">
-    <!-- <script type="text/javascript" src="js/ratchet.js"></script> -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons" >
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
 </head>
 
 <body class="">
-    <header class="bar bar-nav">
-        <h1 class="title">Order Note</h1>
-    </header>
-    <div class="content content-padded order">
+    <nav>
+    <div class="nav-wrapper orange darken-4">
+      <a href="#!" class="brand-logo center">Order Note</a>
+      <ul id="nav-mobile" class="left">
+        <li><a href="home.html"><i class="material-icons">arrow_back</i></a></li>
+      </ul>
+    </div>
+  </nav>
+    <div class="content container order">
         <form class="input-group">
-            <input type="text" placeholder="Model No">
-            <input type="number" placeholder="QTY">
-            <input type="text" placeholder="Product Code">
-            <button class="btn btn-primary btn-block">Order Now</button>
+            <div class="input-field">
+                <input type="text" >
+                <label for="">Model No.</label>
+            </div>
+            <div class="input-field">
+                <input type="number" ><label for="">Qty</label>
+            </div>
+            <div class="input-field">
+                <input type="text" ><label for="">Product Code</label>
+            </div>
+            <div class="input-field">
+                <button type="button" class="btn btn-large btn-block waves-effect orange darken-4" style="width:100%;">Order Now</button>
+                
+            </div>
+            <div class="input-field"><a href="home.html" class="btn btn-large btn-block waves-effect grey" style="width:100%;" >Back</a></div>
+            
         </form>
         <div class="buttons" >
-            <a href="home.html" class="btn btn-block" >Back</a>
+            
         </div>
     </div>
 </body>
