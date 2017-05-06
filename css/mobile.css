@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+body .roboto, .content, .btn, .bar {font-family: 'Roboto', sans-serif;}
+.splash {
+    background-image: url("../images/splash-back.png");
+    background-size: 100%;
+    padding: 70px 0;
+    text-align: center;
+    color: #fff;
+}
+
+.splash h3 {
+    text-shadow: 0px 3px #428bca;
+    font-weight: 400;
+}
+
+.bar-nav {
+    background-color: #295e8c;
+    border-bottom: 1px solid #295e8c;
+}
+
+.bar-nav .title {
+    color: #fff;
+}
+.bar-footer { background: none; border:none;}
+.content { background: none;}
+.content .btn {
+    padding: 12px;
+    margin-top: 12px;
+    font-size: 20px;
+    color: #fff;
+    background-color: #999999;
+    border-radius: 0;
+    border: 1px solid #999;
+    font-family: 'Roboto', sans-serif;
+}
+.content .btn-primary {
+    background: rgba(255,255,255,0.5);
+    color: #295e8c;
+    border-color: #aaa;
+}
+.order form {
+    padding: 20px 0;
+}
+
+.input-group input,
+.input-group select {
+    margin-bottom: 20px;
+    padding-left: 0;
+    padding-right: 0;
+    height: 35px;
+    box-shadow: none;
+    border:none;
+    border-bottom: 1px solid #ddd;
+    background: none;
+    font-family: 'Roboto', sans-serif;
+}
+.input-group select { -webkit-appearance:none; -moz-appearance:none; background: url(../images/arrow-down.png) no-repeat 98% 50%; -webkit-background-size: 32px; background-size: 32px; font-size: 1em;}
+
+.order .btn-primary {
+    border-radius: 0;
+    background: #295e8c;
+    color: #fff;
+    border-color: #295e8c;
+}
+
+
+.home {
+    background-image: url("../images/home-back.png");
+    background-size: 100%;
+}
+
+.buttons { position: absolute; width: 100%; bottom: 20px;}
+.buttons .btn {margin-bottom: 0;}
+
+/*.content-padded .input-group { margin-left: -10px; margin-right: -10px;}*/
