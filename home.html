@@ -5,22 +5,35 @@
     <meta charset="utf-8">
     <title>Ratchet template page</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="stylesheet" href="css/ratchet.css">
-    <link rel="stylesheet" href="css/mobile.css">
-    <script type="text/javascript" src="js/ratchet.js"></script>
+    <!-- <link rel="stylesheet" href="css/mobile.css"> -->
+    <link rel="stylesheet" href="css/material-icons.css">
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <style type="text/css">
+    body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+        background:url('images/home-back.png') no-repeat center / cover;
+      }
+    </style>
 </head>
 
-<body class="">
-    <header class="bar bar-nav">
-        <h1 class="title">Home</h1>
-    </header>
-    <div class="content home">
-        <div class="buttons">
-            <div class="content-padded">
-                <a href="order.html" class="btn btn-block btn-primary" data-ignore="push" data-transition="slide-in">ORDER NOTE</a>
-                <a href="register.html" class="btn btn-block btn-primary" data-ignore="push" data-transition="slide-in" >REGISTER STORE</a>
+<body>
+    <nav>
+        <div class="nav-wrapper orange darken-4">
+          <a href="#!" class="brand-logo center">Home</a>
+        </div>
+      </nav>
+    <div class="content home" style="margin-top:80vw;">
+        <div class="container">
+            <div class="input-field">
+                <a href="order.html" class="btn btn-large btn-block teal lighten-2 waves-effect" style="width:100%;" >ORDER NOTE</a>
+            </div>
+            <div class="input-field">
+                <a href="register.html" class="btn btn-large btn-block teal lighten-2 waves-effect" style="width:100%;" >REGISTER STORE</a>
             </div>
         </div>
     </div>
