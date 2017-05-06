@@ -8,6 +8,7 @@
         WOW Team
     </author>
     <content src="index.html" />
+    <icon src="icon.png"></icon>
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="14" />
     <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />
