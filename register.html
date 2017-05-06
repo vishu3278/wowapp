@@ -11,6 +11,14 @@
     <script type="text/javascript">
     $(document).ready(function() {
         $('select').material_select();
+        $('#address').characterCounter();
+        $("#category").on('change',function () {
+            if($(this).val() == 0){
+                $("#otherInput").removeClass("hide");
+            }else{
+                $("#otherInput").addClass("hide");
+            }
+        })
       });
     </script>
 </head>
@@ -27,15 +35,21 @@
     <div class="content container order">
         <form class="input-group">
             <div class="input-field"><input type="text" ><label for="">Store Name</label></div>
-            <div class="input-field"><textarea name="address" class="materialize-textarea"></textarea><label for="">Address</label></div>
-            <div class="input-field"><input type="email" ><label for="">Email</label></div>
-            <div class="input-field"><input type="tel" placeholder=""><label for="">Phone</label></div>
-            <div class="input-field"><select name="category" id="">
-                <option value="">Grocery</option>
-                <option value="">Fashion</option>
-                <option value="">Electronics</option>
-                <option value="">Other</option>
-            </select><label for="">Category</label></div>
+            <div class="input-field"><textarea name="address" id="address" class="materialize-textarea" data-length="120"></textarea><label for="">Address</label></div>
+            <div class="input-field"><input type="email" class="validate" ><label for="" data-error="wrong">Email</label></div>
+            <div class="input-field"><input type="tel" class="validate" ><label for="" data-error="wrong">Phone</label></div>
+            <div class="input-field">
+                <select name="category" id="category">
+                    <option value="1">Grocery</option>
+                    <option value="2">Fashion</option>
+                    <option value="3">Electronics</option>
+                    <option value="0">Other</option>
+                </select>
+                <label for="">Category</label>
+            </div>
+            <div class="input-field hide" id="otherInput">
+                <input type="text"><label for="">Other Category</label>
+            </div>
             <div class="input-field">
                 <button class="btn btn-large btn-block waves-effect orange darken-4" style="width:100%;">Register</button>
             </div>
