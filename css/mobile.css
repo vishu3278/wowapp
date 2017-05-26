@@ -1,5 +1,22 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
-body .roboto, .content, .btn, .bar {font-family: 'Roboto', sans-serif;}
+@import url('https://fonts.googleapis.com/css?family=Architects+Daughter');
+body .roboto,
+.content,
+.btn,
+.bar {
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.container {
+    margin: 30px auto;
+}
+
 .splash {
     background-image: url("../images/splash-back.png");
     background-size: 100%;
@@ -21,40 +38,82 @@ body .roboto, .content, .btn, .bar {font-family: 'Roboto', sans-serif;}
 .bar-nav .title {
     color: #fff;
 }
-.bar-footer { background: none; border:none;}
-.content { background: none;}
+
+.bar-footer {
+    background: none;
+    border: none;
+}
+
+.content {
+    background: none;
+}
+
 .content .btn {
-    padding: 12px;
     margin-top: 12px;
     font-size: 20px;
     color: #fff;
     background-color: #999999;
     border-radius: 0;
-    border: 1px solid #999;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Architects Daughter', cursive;
 }
+
 .content .btn-primary {
-    background: rgba(255,255,255,0.5);
+    background: rgba(255, 255, 255, 0.5);
     color: #295e8c;
     border-color: #aaa;
 }
-.order form {
-    padding: 20px 0;
+
+.order {
+    margin-top: 30px;
+    background: url("../images/home-logo.png") no-repeat center;
+    background-size: 100%;
+    background-position: inherit;
+}
+
+.form-background {
+    background: url("../images/input-back.png");
+    padding: 5px 5px 15px;
+}
+
+
+/* 
+.footer-button {
+    position: absolute;
+    bottom: -20px;
+    width: 90%;
+} */
+
+.pink.darken-4 {
+    font-family: 'Architects Daughter', cursive;
+}
+
+.order textarea.materialize-textarea {
+    padding: 0;
+    min-height: 0;
+    margin: 0;
 }
 
 .input-group input,
 .input-group select {
-    margin-bottom: 20px;
+    margin-bottom: 0px;
     padding-left: 0;
     padding-right: 0;
     height: 35px;
     box-shadow: none;
-    border:none;
-    border-bottom: 1px solid #ddd;
+    border: none;
+    border-bottom: 1px solid #993366;
     background: none;
     font-family: 'Roboto', sans-serif;
 }
-.input-group select { -webkit-appearance:none; -moz-appearance:none; background: url(../images/arrow-down.png) no-repeat 98% 50%; -webkit-background-size: 32px; background-size: 32px; font-size: 1em;}
+
+.input-group select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url(../images/arrow-down.png) no-repeat 98% 50%;
+    -webkit-background-size: 32px;
+    background-size: 32px;
+    font-size: 1em;
+}
 
 .order .btn-primary {
     border-radius: 0;
@@ -63,13 +122,15 @@ body .roboto, .content, .btn, .bar {font-family: 'Roboto', sans-serif;}
     border-color: #295e8c;
 }
 
-
-.home {
-    background-image: url("../images/home-back.png");
-    background-size: 100%;
+.buttons {
+    position: absolute;
+    width: 100%;
+    bottom: 20px;
 }
 
-.buttons { position: absolute; width: 100%; bottom: 20px;}
-.buttons .btn {margin-bottom: 0;}
+.buttons .btn {
+    margin-bottom: 0;
+}
+
 
 /*.content-padded .input-group { margin-left: -10px; margin-right: -10px;}*/
