@@ -137,5 +137,7 @@ body {
     margin-bottom: 0;
 }
 
+.btn-block { width: 100%;}
 
+.modal.bottom-sheet .modal-content { padding: 10px;}
 /*.content-padded .input-group { margin-left: -10px; margin-right: -10px;}*/
