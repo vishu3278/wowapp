@@ -5,19 +5,42 @@
     <meta charset="utf-8">
     <title>MMS Store App</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="css/ratchet.css">
-    <!-- <link rel="stylesheet" href="css/mobile.css"> -->
     <link rel="stylesheet" href="css/material-icons.css">
     <link rel="stylesheet" href="css/materialize.min.css">
     <link rel="stylesheet" href="css/mobile.css">
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
+    
 </head>
 
 <body>
     <nav>
         <div class="nav-wrapper pink darken-4">
             <a href="#!" class="brand-logo center">Home</a>
+            <ul id="slide-out" class="side-nav">
+                <li>
+                    <div class="userView">
+                        <!-- <div class="background">
+                            <img src="images/office.jpg">
+                        </div> -->
+                        <!-- <a href="#!user"><img class="circle" src="images/yuna.jpg"></a> -->
+                        <a href="#!name"><span class="pink-text name" id="fullname">John Doe</span></a>
+                        <a href="#!email"><span class="pink-text email" id="email">jdandturk@gmail.com</span></a>
+                    </div>
+                </li>
+                
+                <li>
+                    <div class="divider"></div>
+                </li>
+                <!-- <li><a class="subheader">Subheader</a></li> -->
+                <li><a class="waves-effect" href="order.html"><i class="mdi-event_note"></i> Order Note</a></li>
+                <li><a class="waves-effect" href="register.html"><i class="mdi-playlist_add"></i> Register Store</a></li>
+                <li><a class="waves-effect" id="logout" href="index.html"><i class="mdi-exit_to_app"></i> Logout</a></li>
+            </ul>
+            <ul class="right">
+                <li><a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-menu"></i></a></li>
+            </ul>
+            
         </div>
     </nav>
     <div class="container">
@@ -31,6 +54,19 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $(".button-collapse").sideNav({
+                menuWidth: 280,
+                edge: 'right',
+                draggable: true
+            });
+
+            $("#fullname").html(sessionStorage.getItem('first_name') + sessionStorage.getItem('last_name'));
+            $("#email").html(sessionStorage.getItem('email'));
+
+        })
+    </script>
 </body>
 
 </html>

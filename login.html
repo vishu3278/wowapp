@@ -29,6 +29,7 @@
         </div>
         <div class="chip red lighten-3 hide" style="width:100%;">Invalid credentials !</div>
         <form class="input-group" id="loginform" action="" style="position:relative;">
+            <div class="overlay hide"></div>
             <div class="form-background">
                 <div class="input-field">
                     <input type="email" name="email" id="email">
@@ -39,7 +40,7 @@
                     <label>Password</label>
                 </div>
             </div>
-            <p style="margin: 1em 0; text-align:right;"><a href="#">forgot password? </a></p>
+            <!-- <p style="margin: 1em 0; text-align:right;"><a href="#">forgot password? </a></p> -->
             <div class="footer-button">
                 <div class="input-field">
                     <button type="button" id="loginbtn" class="btn btn-large btn-block waves-effect pink darken-4" style="width:100%;">Login</button>
@@ -67,8 +68,8 @@
             if (user == '' && pass == '') {
                 alert("Empty fields not allowed !");
             }else{
-                console.info(data);
-                $(".progress").removeClass("hide");
+                // console.info(data);
+                $(".progress, .overlay").removeClass("hide");
                 $.ajax({
                     url: 'http://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/login.php',
                     type:'POST',
@@ -77,10 +78,20 @@
                     success: function(result) {
                         if (result.status == 1) {
                             // alert(result.data[0].first_name);
+                            var sman = result.data;
+                            /*alert(result.data.first_name);
+                            console.log(result.data.email);*/
+
+                            for (var key in sman) {
+                                // alert(key + " -> " + sman[key]);
+                                // localStorage.setItem(key,sman[key]);
+                                sessionStorage.setItem(key,sman[key]);
+                                console.log(key + " -> " + sman[key]);
+                            }
                             window.location.assign("home.html");
                         }else{
                             // alert(result.status);
-                            $(".progress").addClass("hide");
+                            $(".progress, .overlay").addClass("hide");
                             $(".chip").removeClass("hide").html(result.error);
                         }
                     },

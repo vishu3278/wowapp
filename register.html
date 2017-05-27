@@ -1,62 +1,140 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
-    <title>Ratchet template page</title>
+    <title>Register Store</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="css/material-icons.css">
     <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/mobile.css">
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-        $('select').material_select();
-        $('#address').characterCounter();
-        $("#category").on('change',function () {
-            if($(this).val() == 0){
+        // $('select').material_select();
+        $('#address, #remarks').characterCounter();
+        /*$("#category").on('change', function() {
+            if ($(this).val() == 0) {
                 $("#otherInput").removeClass("hide");
-            }else{
+            } else {
                 $("#otherInput").addClass("hide");
             }
-        })
-      });
+        });*/
+    });
     </script>
 </head>
 
 <body>
     <nav>
-    <div class="nav-wrapper orange darken-4">
-      <a href="#!" class="brand-logo center">Register</a>
-      <ul id="nav-mobile" class="left">
-        <li><a href="home.html"><i class="mdi-arrow_back "></i></a></li>
-      </ul>
-    </div>
-  </nav>
+        <div class="nav-wrapper pink darken-4">
+            <a href="#!" class="brand-logo center">Register</a>
+            <ul id="nav-mobile" class="left">
+                <li><a href="home.html"><i class="mdi-arrow_back "></i></a></li>
+            </ul>
+        </div>
+    </nav>
     <div class="content container order">
-        <form class="input-group">
-            <div class="input-field"><input type="text" ><label for="">Store Name</label></div>
-            <div class="input-field"><textarea name="address" id="address" class="materialize-textarea" data-length="120"></textarea><label for="">Address</label></div>
-            <div class="input-field"><input type="email" class="validate" ><label for="" data-error="wrong">Email</label></div>
-            <div class="input-field"><input type="tel" class="validate" ><label for="" data-error="wrong">Phone</label></div>
-            <div class="input-field">
-                <select name="category" id="category">
-                    <option value="1">Grocery</option>
-                    <option value="2">Fashion</option>
-                    <option value="3">Electronics</option>
-                    <option value="0">Other</option>
-                </select>
-                <label for="">Category</label>
+        <div class="progress hide">
+            <div class="indeterminate"></div>
+        </div>
+        <div class="chip red lighten-3 hide" style="width:100%;">Invalid credentials !</div>
+        <form class="input-group" style="position:relative;">
+            <div class="overlay hide"></div>
+            <div class="form-background">
+                <div class="input-field">
+                    <input type="text" id="name">
+                    <label>Store Name</label>
+                </div>
+                 <div class="input-field">
+                   <textarea id="address" class="materialize-textarea" data-length="120"></textarea>
+                   <label>Address</label>
+               </div>
+                <div class="input-field">
+                    <input type="text" id="person">
+                    <label>Contact Person</label>
+                </div>
+                <div class="input-field">
+                    <input type="tel" id="phone" class="validate">
+                    <label data-error="wrong">Contact Number</label>
+                </div>
+                <div class="input-field">
+                    <input type="email" id="email" class="validate">
+                    <label data-error="wrong">Email</label>
+                </div>
+                <!-- <div class="input-field">
+                    <select name="category" id="category">
+                        <option value="1">Grocery</option>
+                        <option value="2">Fashion</option>
+                        <option value="3">Electronics</option>
+                        <option value="0">Other</option>
+                    </select>
+                    <label>Type of Store</label>
+                </div> -->
+                <!-- <div class="input-field hide" id="otherInput">
+                    <input type="text">
+                    <label>Other Category</label>
+                </div> -->
+                <div class="input-field">
+                    <textarea  id="remarks" class="materialize-textarea" data-length="120"></textarea>
+                    <label>Remarks</label>
+                </div>
             </div>
-            <div class="input-field hide" id="otherInput">
-                <input type="text"><label for="">Other Category</label>
+            <div class="footer-button">
+                <div class="input-field">
+                    <button type="button" id="register" class="btn btn-large btn-block waves-effect pink darken-4" style="width:100%;">Send Request</button>
+                </div>
+                <div class="input-field"><a href="home.html" class="btn btn-large btn-block waves-effect green" style="width:100%;">Back</a></div>
             </div>
-            <div class="input-field">
-                <button class="btn btn-large btn-block waves-effect orange darken-4" style="width:100%;">Register</button>
-            </div>
-            <div class="input-field"><a href="home.html" class="btn btn-large btn-block waves-effect grey" style="width:100%;">Back</a></div>
         </form>
-        
     </div>
+    <script type="text/javascript">
+        $(function ($) {
+            var input = {"sales_person_id":"14","name":"MegaMart","phoneno":"9889897860","cont_person":"Rohit Kumar","date":"24-5-2017","address":"Sector-16","city":"Sector-15","state":"uttar pradesh","country":"India","pincode":"201301","remark":"Reliable Store","status":"enabled"};
+            $("#register").on('click',function() {
+                var name = $("#name").val(),
+                    address = $("#address").val(),
+                    cont_person = $("#person").val(),
+                    phoneno = $("#phone").val(),
+                    email = $("#email").val(),
+                    remark = $("#remarks").val()
+                    date = new Date();
+                var data = {"sales_person_id":sessionStorage.getItem('sales_person_id'),"name":name,"phoneno":phoneno,"cont_person":cont_person,"date":date,"address":address,"city":"Sector-15","state":"uttar pradesh","country":"India","pincode":"201301","remark":remark,"status":"enabled"}
+
+                console.log(JSON.stringify(data));
+
+                $(".progress, .overlay").removeClass("hide");
+
+                $.ajax({
+                    url: 'http://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/storeadd.php',
+                    type:'POST',
+                    crossDomain:true,
+                    data: JSON.stringify(data),
+                    success: function(result) {
+                        if (result.status == 1) {
+                            // alert(result.data[0].first_name);
+                            var stor = result.data;
+                            /*alert(result.data.first_name);
+                            console.log(result.data.email);*/
+
+                            for (var key in stor) {
+                                // alert(key + " -> " + stor[key]);
+                                // localStorage.setItem(key,stor[key]);
+                                // sessionStorage.setItem(key,stor[key]);
+                                console.log(key + " -> " + stor[key]);
+                            }
+                            // window.location.assign("home.html");
+                        }else{
+                            // alert(result.status);
+                            $(".progress, .overlay").addClass("hide");
+                            $(".chip").removeClass("hide").html(result.error);
+                        }
+                    },
+                    error:function() {alert("Some error occured !")}
+                });
+            })
+        })
+    </script>
 </body>
 
 </html>
