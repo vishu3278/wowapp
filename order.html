@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>MMSApp Order Page</title>
@@ -7,42 +8,118 @@
     <!-- <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons" > -->
     <link rel="stylesheet" href="css/material-icons.css">
     <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/mobile.css">
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('.datepicker').pickadate({
+                
+        });
+    });
+    </script>
 </head>
 
 <body>
     <nav>
-    <div class="nav-wrapper orange darken-4">
-      <a href="#!" class="brand-logo center">Order Note</a>
-      <ul id="nav-mobile" class="left">
-        <li><a href="home.html"><i class="mdi-arrow_back "></i></a></li>
-      </ul>
-    </div>
-  </nav>
+        <div class="nav-wrapper pink darken-4">
+            <a href="#!" class="brand-logo center">Order Note</a>
+            <ul id="nav-mobile" class="left">
+                <li><a href="home.html"><i class="mdi-arrow_back "></i></a></li>
+            </ul>
+        </div>
+    </nav>
     <div class="content container order">
         <form class="input-group">
-            <div class="input-field">
-                <input type="text" >
-                <label for="">Model No.</label>
+            <div class="form-background">
+                <div class="input-field">
+                    <input type="number">
+                    <label>Order No.</label>
+                </div>
+                <div class="input-field">
+                    <input type="date" class="datepicker">
+                    <label>Order Date</label>
+                </div>
+                <div class="input-field">
+                    <input type="date" class="datepicker">
+                    <label>Delivery Date</label>
+                </div>
+                <div class="input-field">
+                    <input type="text">
+                    <label>Company</label>
+                </div>
+                <div class="input-field">
+                    <input type="number">
+                    <label>Order Ref No.</label>
+                </div>
+                <div class="input-field">
+                    <input type="text">
+                    <label>Contact Name</label>
+                </div>
+                <div class="input-field">
+                    <input type="email">
+                    <label>Email</label>
+                </div>
+                <div class="input-field">
+                    <textarea name="address" id="address" class="materialize-textarea" data-length="120"></textarea>
+                    <label>Address</label>
+                </div>
+                <div class="input-field">
+                    <input type="tel" class="validate">
+                    <label data-error="wrong">Tel</label>
+                </div>
+                <div class="input-field">
+                    <input type="tel" class="validate">
+                    <label data-error="wrong">Mobile</label>
+                </div>
             </div>
-            <div class="input-field">
-                <input type="number" ><label for="">Qty</label>
+            <div class="form-background">
+                <div class="input-field">
+                    <input type="text">
+                    <label>Particular</label>
+                </div>
+                <div class="input-field">
+                    <input type="number">
+                    <label>Model No.</label>
+                </div>
+                <div class="input-field">
+                    <input type="number">
+                    <label>Ctn.</label>
+                </div>
+                <div class="input-field">
+                    <input type="number">
+                    <label>Qty,/Ctn</label>
+                </div>
+                <div class="input-field">
+                    <input type="number">
+                    <label>Rate</label>
+                </div>
+                <div class="input-field">
+                    <input type="text">
+                    <label>Remark</label>
+                </div>
             </div>
-            <div class="input-field">
-                <input type="text" ><label for="">Product Code</label>
+            <div class="footer-button">
+                <div class="input-field">
+                    <button type="button" class="btn btn-large btn-block waves-effect pink darken-4" style="width:100%;">Order Now</button>
+                </div>
+                <div class="input-field"><a href="home.html" class="btn btn-large btn-block waves-effect green" style="width:100%;">Back</a></div>
             </div>
-            <div class="input-field">
-                <button type="button" class="btn btn-large btn-block waves-effect orange darken-4" style="width:100%;">Order Now</button>
-                
-            </div>
-            <div class="input-field"><a href="home.html" class="btn btn-large btn-block waves-effect grey" style="width:100%;" >Back</a></div>
-            
         </form>
-        <div class="buttons" >
-            
+        <div class="buttons">
         </div>
     </div>
 </body>
+<style type="text/css">
+.picker__month-display,
+.picker__day-display,
+.picker__year-display {
+    display: none;
+}
+
+.picker__date-display {
+    padding: 0
+}
+</style>
 
 </html>
