@@ -21,6 +21,12 @@
                 $("#otherInput").addClass("hide");
             }
         });*/
+        $('.modal').modal();
+        $('#modal1').modal({
+            complete:function() {
+                $("form").reset();
+            }
+        });
     });
     </script>
 </head>
@@ -46,10 +52,10 @@
                     <input type="text" id="name">
                     <label>Store Name</label>
                 </div>
-                 <div class="input-field">
-                   <textarea id="address" class="materialize-textarea" data-length="120"></textarea>
-                   <label>Address</label>
-               </div>
+                <div class="input-field">
+                    <textarea id="address" class="materialize-textarea" data-length="120"></textarea>
+                    <label>Address</label>
+                </div>
                 <div class="input-field">
                     <input type="text" id="person">
                     <label>Contact Person</label>
@@ -76,7 +82,7 @@
                     <label>Other Category</label>
                 </div> -->
                 <div class="input-field">
-                    <textarea  id="remarks" class="materialize-textarea" data-length="120"></textarea>
+                    <textarea id="remarks" class="materialize-textarea" data-length="120"></textarea>
                     <label>Remarks</label>
                 </div>
             </div>
@@ -88,52 +94,83 @@
             </div>
         </form>
     </div>
+    <!-- <a class="waves-effect waves-light btn" href="#modal1">Modal</a> -->
+    <div id="modal1" class="modal bottom-sheet">
+        <div class="modal-content">
+            
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect btn btn-block pink darken-4">OK</a>
+        </div>
+    </div>
     <script type="text/javascript">
-        $(function ($) {
-            var input = {"sales_person_id":"14","name":"MegaMart","phoneno":"9889897860","cont_person":"Rohit Kumar","date":"24-5-2017","address":"Sector-16","city":"Sector-15","state":"uttar pradesh","country":"India","pincode":"201301","remark":"Reliable Store","status":"enabled"};
-            $("#register").on('click',function() {
-                var name = $("#name").val(),
-                    address = $("#address").val(),
-                    cont_person = $("#person").val(),
-                    phoneno = $("#phone").val(),
-                    email = $("#email").val(),
-                    remark = $("#remarks").val()
-                    date = new Date();
-                var data = {"sales_person_id":sessionStorage.getItem('sales_person_id'),"name":name,"phoneno":phoneno,"cont_person":cont_person,"date":date,"address":address,"city":"Sector-15","state":"uttar pradesh","country":"India","pincode":"201301","remark":remark,"status":"enabled"}
+    $(function($) {
+        var input = {
+            "sales_person_id": "14",
+            "name": "MegaMart",
+            "phoneno": "9889897860",
+            "cont_person": "Rohit Kumar",
+            "date": "24-5-2017",
+            "address": "Sector-16",
+            "city": "Sector-15",
+            "state": "uttar pradesh",
+            "country": "India",
+            "pincode": "201301",
+            "remark": "Reliable Store",
+            "status": "enabled"
+        };
+        $("#register").on('click', function() {
+            var name = $("#name").val(),
+                address = $("#address").val(),
+                cont_person = $("#person").val(),
+                phoneno = $("#phone").val(),
+                email = $("#email").val(),
+                remark = $("#remarks").val()
+            date = new Date();
+            var data = {
+                "sales_person_id": sessionStorage.getItem('sales_person_id'),
+                "name": name,
+                "phoneno": phoneno,
+                "cont_person": cont_person,
+                "date": date,
+                "address": address,
+                "city": "Sector-15",
+                "state": "uttar pradesh",
+                "country": "India",
+                "pincode": "201301",
+                "remark": remark,
+                "status": "enabled"
+            }
 
-                console.log(JSON.stringify(data));
+            console.log(JSON.stringify(data));
 
-                $(".progress, .overlay").removeClass("hide");
+            $(".progress, .overlay").removeClass("hide");
 
-                $.ajax({
-                    url: 'http://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/storeadd.php',
-                    type:'POST',
-                    crossDomain:true,
-                    data: JSON.stringify(data),
-                    success: function(result) {
-                        if (result.status == 1) {
-                            // alert(result.data[0].first_name);
-                            var stor = result.data;
-                            /*alert(result.data.first_name);
-                            console.log(result.data.email);*/
-
-                            for (var key in stor) {
-                                // alert(key + " -> " + stor[key]);
-                                // localStorage.setItem(key,stor[key]);
-                                // sessionStorage.setItem(key,stor[key]);
-                                console.log(key + " -> " + stor[key]);
-                            }
-                            // window.location.assign("home.html");
-                        }else{
-                            // alert(result.status);
-                            $(".progress, .overlay").addClass("hide");
-                            $(".chip").removeClass("hide").html(result.error);
-                        }
-                    },
-                    error:function() {alert("Some error occured !")}
-                });
-            })
+            $.ajax({
+                url: 'http://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/storeadd.php',
+                type: 'POST',
+                crossDomain: true,
+                data: JSON.stringify(data),
+                success: function(result) {
+                    if (result.status == 1) {
+                        
+                        // window.location.assign("home.html");
+                        $("#modal1 .modal-content").html("<p>"+result.data+"</p>");
+                        $('#modal1').modal('open');
+                        $(".progress, .overlay").addClass("hide");
+                        
+                    } else {
+                        // alert(result.status);
+                        $(".progress, .overlay").addClass("hide");
+                        $(".chip").removeClass("hide").html(result.error);
+                    }
+                },
+                error: function() {
+                    alert("Some error occured !")
+                }
+            });
         })
+    })
     </script>
 </body>
 
