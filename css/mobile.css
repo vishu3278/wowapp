@@ -2,6 +2,7 @@
 /*@import url('https://fonts.googleapis.com/css?family=Architects+Daughter');*/
 @import url('https://fonts.googleapis.com/css?family=Rancho');
 .rancho {font-family: 'Rancho', cursive;}
+body, html { font-size: 16px;}
 body .roboto,
 .content,
 .btn,
@@ -10,6 +11,7 @@ body .roboto,
     font-family: 'Roboto', sans-serif;
 }
 .side-nav {}
+.side-nav li>a { padding-left: 15px; padding-right: 10px;}
 body {
     display: flex;
     min-height: 100vh;
@@ -17,7 +19,7 @@ body {
 }
 
 .container {
-    margin: 30px auto;
+    margin: 15px auto;
 }
 .overlay { position: absolute; width: 100%; height: 100%; left: 0; right: 0; top: 0; bottom: 0; z-index: 99; background: rgba(100,100,100,0.5);}
 .splash {
@@ -48,7 +50,7 @@ body {
 }
 
 .content {
-    background: none;
+    background: none; position: relative; min-height: 400px; min-height: 75vh;
 }
 
 .content .btn {
@@ -68,7 +70,6 @@ body {
 }
 
 .order {
-    margin-top: 30px;
     background: url("../images/home-logo.png") no-repeat center;
     background-size: 100%;
     background-position: inherit;
@@ -141,3 +142,12 @@ body {
 
 .modal.bottom-sheet .modal-content { padding: 10px;}
 /*.content-padded .input-group { margin-left: -10px; margin-right: -10px;}*/
+
+
+.card {}
+.card .card-content { min-height: 150px;}
+.card .card-content,
+.card .card-action,
+.card .card-reveal { padding: 8px 12px;}
+.card .card-content p { margin-bottom: 2px;}
+.card .card-reveal p { margin-top: 2px; margin-bottom: 0px;}
