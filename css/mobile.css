@@ -143,6 +143,8 @@ body {
 .modal.bottom-sheet .modal-content { padding: 10px;}
 /*.content-padded .input-group { margin-left: -10px; margin-right: -10px;}*/
 
+/*datepicker*/
+.picker__date-display { display: none;}
 
 .card {}
 .card .card-content { min-height: 150px;}
