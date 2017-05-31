@@ -14,7 +14,7 @@
     <script type="text/javascript">
     $(document).ready(function() {
         $('.datepicker').pickadate({
-                
+
         });
     });
     </script>
@@ -37,11 +37,11 @@
                     <label>Order No.</label>
                 </div>
                 <div class="input-field">
-                    <input type="date" class="datepicker">
+                    <input type="date" >
                     <label>Order Date</label>
                 </div>
                 <div class="input-field">
-                    <input type="date" class="datepicker">
+                    <input type="date" >
                     <label>Delivery Date</label>
                 </div>
                 <div class="input-field">
@@ -57,8 +57,8 @@
                     <label>Contact Name</label>
                 </div>
                 <div class="input-field">
-                    <input type="email">
-                    <label>Email</label>
+                    <input type="email" class="validate">
+                    <label data-error="wrong email">Email</label>
                 </div>
                 <div class="input-field">
                     <textarea name="address" id="address" class="materialize-textarea" data-length="120"></textarea>
@@ -83,15 +83,15 @@
                     <label>Model No.</label>
                 </div>
                 <div class="input-field">
-                    <input type="number">
+                    <input type="number" min="0">
                     <label>Ctn.</label>
                 </div>
                 <div class="input-field">
-                    <input type="number">
+                    <input type="number" min="0">
                     <label>Qty,/Ctn</label>
                 </div>
                 <div class="input-field">
-                    <input type="number">
+                    <input type="number" min="0">
                     <label>Rate</label>
                 </div>
                 <div class="input-field">
@@ -101,25 +101,14 @@
             </div>
             <div class="footer-button">
                 <div class="input-field">
-                    <button type="button" class="btn btn-large btn-block waves-effect pink darken-4" style="width:100%;">Order Now</button>
+                    <button type="button" class="btn btn-large btn-block waves-effect pink darken-4" >Order Now</button>
                 </div>
-                <div class="input-field"><a href="home.html" class="btn btn-large btn-block waves-effect green" style="width:100%;">Back</a></div>
+                <div class="input-field"><a href="home.html" class="btn btn-large btn-block waves-effect green" >Back</a></div>
             </div>
         </form>
         <div class="buttons">
         </div>
     </div>
 </body>
-<style type="text/css">
-.picker__month-display,
-.picker__day-display,
-.picker__year-display {
-    display: none;
-}
-
-.picker__date-display {
-    padding: 0
-}
-</style>
 
 </html>
