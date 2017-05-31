@@ -8,14 +8,15 @@
     <!-- <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons" > -->
     <link rel="stylesheet" href="css/material-icons.css">
     <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="css/pignose.calendar.min.css">
     <link rel="stylesheet" href="css/mobile.css">
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/moment.min.js"></script>
+    <script type="text/javascript" src="js/pignose.calendar.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-        $('.datepicker').pickadate({
-
-        });
+        $('.calendar').pignoseCalendar();
     });
     </script>
 </head>
@@ -37,11 +38,11 @@
                     <label>Order No.</label>
                 </div>
                 <div class="input-field">
-                    <input type="date" >
+                    <input type="text" name="orDate" id="orDate" class="calendar" >
                     <label>Order Date</label>
                 </div>
                 <div class="input-field">
-                    <input type="date" >
+                    <input type="text" name="dlDate" id="dlDate" class="calendar" >
                     <label>Delivery Date</label>
                 </div>
                 <div class="input-field">
