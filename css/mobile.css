@@ -78,6 +78,7 @@ body {
 .form-background {
     background: url("../images/input-back.png");
     padding: 5px 5px 15px;
+    margin-bottom: 15px;
 }
 
 
@@ -145,6 +146,7 @@ body {
 
 /*datepicker*/
 .picker__date-display { display: none;}
+.autocomplete-content { margin-top: 0;}
 
 .card {}
 .card .card-content { min-height: 150px;}
