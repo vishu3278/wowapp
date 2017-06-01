@@ -16,7 +16,15 @@
     <script type="text/javascript" src="js/pignose.calendar.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-        $('.calendar').pignoseCalendar();
+        var currdate = new Date() - 86400000;
+        $('#orderDate').pignoseCalendar({
+            format: 'DD-MM-YYYY',
+            minDate: currdate,
+            buttons:true,
+            date:moment()
+        });
+        // console.log(currdate);
+        // $('select').material_select();
     });
     </script>
 </head>
@@ -31,74 +39,69 @@
         </div>
     </nav>
     <div class="content container order">
+        <div class="progress hide">
+            <div class="indeterminate"></div>
+        </div>
+        <div class="chip red lighten-3 hide" style="width:100%;">Invalid data !</div>
+        <div class="overlay hide"></div>
+
+        <div class="form-background">
+            <fieldset>
+                <legend>Select Store </legend>
+                <div class="input-group">
+                    <div class="input-field">
+                        <select name="storeList" id="storeList" class="browser-default">
+                            <option value="0">Select Store</option>
+                        </select>
+                        <!-- <label>Store Name</label> -->
+                    </div>
+                </div>
+            </fieldset>
+            <ul class="collection hide" id="storeDetail">
+              <li class="collection-item"><span class="title">Name</span><p>Store Name</p></li>
+              <li class="collection-item">Alvin</li>
+              <li class="collection-item">Alvin</li>
+              <li class="collection-item">Alvin</li>
+            </ul>
+        </div>
+
         <form class="input-group">
             <div class="form-background">
-                <div class="input-field">
-                    <input type="number">
-                    <label>Order No.</label>
-                </div>
-                <div class="input-field">
-                    <input type="text" name="orDate" id="orDate" class="calendar" >
-                    <label>Order Date</label>
-                </div>
-                <div class="input-field">
-                    <input type="text" name="dlDate" id="dlDate" class="calendar" >
-                    <label>Delivery Date</label>
-                </div>
-                <div class="input-field">
-                    <input type="text">
-                    <label>Company</label>
-                </div>
-                <div class="input-field">
-                    <input type="number">
-                    <label>Order Ref No.</label>
-                </div>
-                <div class="input-field">
-                    <input type="text">
-                    <label>Contact Name</label>
-                </div>
-                <div class="input-field">
-                    <input type="email" class="validate">
-                    <label data-error="wrong email">Email</label>
-                </div>
-                <div class="input-field">
-                    <textarea name="address" id="address" class="materialize-textarea" data-length="120"></textarea>
-                    <label>Address</label>
-                </div>
-                <div class="input-field">
-                    <input type="tel" class="validate">
-                    <label data-error="wrong">Tel</label>
-                </div>
-                <div class="input-field">
-                    <input type="tel" class="validate">
-                    <label data-error="wrong">Mobile</label>
-                </div>
-            </div>
-            <div class="form-background">
-                <div class="input-field">
-                    <input type="text">
-                    <label>Particular</label>
-                </div>
-                <div class="input-field">
-                    <input type="number">
-                    <label>Model No.</label>
-                </div>
-                <div class="input-field">
-                    <input type="number" min="0">
-                    <label>Ctn.</label>
-                </div>
-                <div class="input-field">
-                    <input type="number" min="0">
-                    <label>Qty,/Ctn</label>
-                </div>
-                <div class="input-field">
-                    <input type="number" min="0">
-                    <label>Rate</label>
-                </div>
-                <div class="input-field">
-                    <input type="text">
-                    <label>Remark</label>
-                </div>
+                <fieldset>
+                    <legend>Item(s)</legend>
+                    <div class="input-field">
+                        <!-- <label>Category</label> -->
+                        <select name="prodCat" id="prodCat" class="browser-default">
+                            <option value="0">Choose category</option>
+                        </select>
+                    </div>
+                    <div class="input-field">
+                        <!-- <label for="itemList">Particular</label> -->
+                        <select name="itemList" id="itemList" class="browser-default">
+                            <option value="0">Select Item</option>
+                        </select>
+                    </div>
+                    <div class="input-field">
+                        <input type="text">
+                        <label>Model No.</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="number" min="0">
+                        <label>Ctn.</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="number" min="0">
+                        <label>Qty,/Ctn</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="number" min="0">
+                        <label>Rate</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="text">
+                        <label>Remark</label>
+                    </div>
+                </fieldset>
             </div>
             <div class="footer-button">
                 <div class="input-field">
@@ -110,6 +113,148 @@
         <div class="buttons">
         </div>
     </div>
+    <script type="text/javascript">
+    jQuery(function($) {
+        // $(".progress").addClass("hide");
+        $(".progress, .overlay").removeClass("hide");
+
+        var sData = {
+            "sales_person_id": sessionStorage.getItem('sales_person_id')
+        };
+
+        var storesObj; //all stores data as array of objects;
+
+        $.ajax({
+            url: 'http://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/store_list.php',
+            type: 'POST',
+            crossDomain: true,
+            data: JSON.stringify(sData),
+            success: function(result) {
+                if (result.status == 1) {
+                    // alert(result.data[0].first_name);
+                    var sdata = result.data;
+                    // console.log(result.data);
+                    storesObj = result.data;
+                    var stores = ['<option value="0">Select Store</option>'];
+                    for (var i = sdata.length - 1; i >= 0; i--) {
+                        // sdata[i];
+                        stores.push("<option value='"+sdata[i].store_id+"'>"+sdata[i].store_name+" ("+sdata[i].store_id+")</option>");
+                    };
+                    
+                    console.info(storesObj);
+                    // window.location.assign("home.html");
+                    $("#storeList").html(stores.join(''));
+                    $(".progress, .overlay").addClass("hide");
+                } else {
+                    // alert(result.status);
+                    $(".progress, .overlay").addClass("hide");
+                    $(".chip").removeClass("hide").html(result.error);
+                }
+            },
+            error: function() {
+                alert("Some error occured !")
+            }
+        });
+        
+        var currStore = [];
+        $("#storeList").on('change', function() {
+            var storeId = $(this).val();
+            currStore = [];
+            console.info(storeId);
+            for (var i = 0; i < storesObj.length; i++) {
+                // console.log(storesObj[i].store_id);
+                if (storesObj[i].store_id == storeId) {
+                    currStore.push("<li class='collection-item'><span class='title grey-text'>Store Name</span><br><strong>"+storesObj[i].store_name+"</strong></li>");
+                    currStore.push("<li class='collection-item'><span class='title grey-text'>Contact Details</span><br>Name: <strong>"+storesObj[i].cont_person+"</strong><br>Phone: <strong>"+storesObj[i].store_phoneno+"</strong><br>Email: <strong>store@email.com</strong></li>");
+                    currStore.push("<li class='collection-item'><span class='title grey-text'>Address</span><br><strong>"+storesObj[i].store_address+", "+storesObj[i].store_city+", "+storesObj[i].store_state+", "+storesObj[i].store_country+"</strong></li>");
+                    
+                    $("#storeDetail").html(currStore).removeClass("hide");
+                }
+                if(storeId == 0 || storeId == undefined){
+                    $("#storeDetail").html("").addClass("hide");
+                }
+            };
+        });
+
+        var catList = [];
+
+        $.ajax({
+            url:'http://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/category_list.php',
+            type: 'POST',
+            crossDomain: true,
+            data: '',
+            success:function(result) {
+                var cdata = result.data;
+                // console.info(cdata);
+
+                if (result.status == 1) {
+                    for (var i = cdata.length - 1; i >= 0; i--) {
+                        catList.push("<option value='"+cdata[i].category_id+"'>"+cdata[i].category_name+"</option>");
+                    };
+                    // console.info(JSON.stringify(catList));
+                    $("#prodCat").html(catList.join(''));
+                    // $('select').material_select();
+                } else{
+                    $(".chip").removeClass("hide").html(result.error);
+                };
+                
+            },
+            error:function() {
+                alert("Some error occured in category list API!");
+                $(".progress, .overlay").addClass("hide");
+                $(".chip").removeClass("hide").html("Some error occured !");
+            }
+        })
+
+        var prodList = {};
+
+        
+        $("#prodCat").on('change',function() {
+            var curCat = $(this).val();
+            var catData = {
+                "categeory_id": curCat
+            };
+
+            $(".progress, .overlay").removeClass("hide");
+            $(".chip").addClass("hide").html("");
+
+            $.ajax({
+                url: 'http://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/product_list.php',
+                type: 'POST',
+                crossDomain: true,
+                data: JSON.stringify(catData),
+                success: function(result) {
+                    if (result.status == 1) {
+                        // alert(result.data[0].first_name);
+                        var prod = result.data;
+                        // console.log(result.data);
+                        // var stotal = ("<h5 class='center-align'>"+result.total+" stores found</h5>");
+                        var prodArray = ['<option value="0">Select Item</option>'];
+                        for (var i = prod.length - 1; i >= 0; i--) {
+                            prodArray.push('<option value="'+prod[i].item_code+'">'+prod[i].item_name+'</option>');
+                        };
+                        
+                        // window.location.assign("home.html");
+                        $("#itemList").html(prodArray.join(''));
+                        $(".progress, .overlay").addClass("hide");
+                    } else {
+                        // alert(result.status);
+                        $("#itemList").html('<option value="0">Select Item</option>');
+                        $(".progress, .overlay").addClass("hide");
+                        $(".chip").removeClass("hide").html(result.error);
+                    }
+                },
+                error: function() {
+                    alert("Some error occured in product list API !");
+                    $(".progress, .overlay").addClass("hide");
+                    $(".chip").removeClass("hide").html(result.error);
+                }
+            });
+        });
+
+        
+    })
+    </script>
 </body>
 
 </html>

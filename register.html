@@ -22,11 +22,11 @@
             }
         });*/
         $('.modal').modal();
-        $('#modal1').modal({
+        /*$('#modal1').modal({
             complete:function() {
-                $("form").reset();
+                $("form.input-group").reset();
             }
-        });
+        });*/
     });
     </script>
 </head>
@@ -62,11 +62,11 @@
                 </div>
                 <div class="input-field">
                     <input type="tel" id="phone" class="validate">
-                    <label data-error="wrong">Contact Number</label>
+                    <label data-error="Invalid phone">Contact Number</label>
                 </div>
                 <div class="input-field">
                     <input type="email" id="email" class="validate">
-                    <label data-error="wrong">Email</label>
+                    <label data-error="Invalid email">Email</label>
                 </div>
                 <!-- <div class="input-field">
                     <select name="category" id="category">
@@ -158,7 +158,7 @@
                         $("#modal1 .modal-content").html("<p>"+result.data+"</p>");
                         $('#modal1').modal('open');
                         $(".progress, .overlay").addClass("hide");
-                        
+                        $("form.input-group").reset();
                     } else {
                         // alert(result.status);
                         $(".progress, .overlay").addClass("hide");
