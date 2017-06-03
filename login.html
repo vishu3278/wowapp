@@ -62,8 +62,7 @@
                 "email": user,
                 "password": pass
             };
-            // var j={"name":"binchen"};
-            var jdata = JSON.stringify(data);
+            
 
             if (user == '' && pass == '') {
                 alert("Empty fields not allowed !");
@@ -81,13 +80,18 @@
                             var sman = result.data;
                             /*alert(result.data.first_name);
                             console.log(result.data.email);*/
-
-                            for (var key in sman) {
+                            sessionStorage.setItem('sales_person_id',sman.sales_person_id);
+                            sessionStorage.setItem('first_name',sman.first_name);
+                            sessionStorage.setItem('last_name',sman.last_name);
+                            sessionStorage.setItem('designation',sman.designation);
+                            sessionStorage.setItem('email',sman.email);
+                            sessionStorage.setItem('phoneno',sman.phoneno);
+                            /*for (var key in sman) {
                                 // alert(key + " -> " + sman[key]);
                                 // localStorage.setItem(key,sman[key]);
                                 sessionStorage.setItem(key,sman[key]);
-                                console.log(key + " -> " + sman[key]);
-                            }
+                                // console.log(key + " -> " + sman[key]);
+                            }*/
                             window.location.assign("home.html");
                         }else{
                             // alert(result.status);

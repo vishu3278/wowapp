@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="css/mobile.css">
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
-    
 </head>
 
 <body>
@@ -24,11 +23,14 @@
                             <img src="images/office.jpg">
                         </div> -->
                         <!-- <a href="#!user"><img class="circle" src="images/yuna.jpg"></a> -->
-                        <a href="#!name"><span class="pink-text name" id="fullname">John Doe</span></a>
-                        <a href="#!email"><span class="pink-text email" id="email">jdandturk@gmail.com</span></a>
+                        <p class="name"><span class="pink-text text-darken-4 " id="fullname">John Doe</span></p>
+                        <p class="email"><span class="pink-text " id="designation">Salesperson</span>
+                            <br>
+                            <span class="pink-text " id="email">jdandturk@gmail.com</span>
+                            <br>
+                            <span class="pink-text " id="phone">9876543210</span></p>
                     </div>
                 </li>
-                
                 <li>
                     <div class="divider"></div>
                 </li>
@@ -41,7 +43,6 @@
             <ul class="right">
                 <li><a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-menu"></i></a></li>
             </ul>
-            
         </div>
     </nav>
     <div class="content container">
@@ -56,17 +57,19 @@
         </div>
     </div>
     <script type="text/javascript">
-        jQuery(function ($) {
-            $(".button-collapse").sideNav({
-                menuWidth: 280,
-                edge: 'right',
-                draggable: true
-            });
+    jQuery(function($) {
+        $(".button-collapse").sideNav({
+            menuWidth: 280,
+            edge: 'right',
+            draggable: true
+        });
 
-            $("#fullname").html(sessionStorage.getItem('first_name') + sessionStorage.getItem('last_name'));
-            $("#email").html(sessionStorage.getItem('email'));
+        $("#fullname").html(sessionStorage.getItem('first_name') + sessionStorage.getItem('last_name'));
+        $("#email").html(sessionStorage.getItem('email'));
+        $("#phone").html(sessionStorage.getItem('phoneno'));
+        $("#designation").html(sessionStorage.getItem('designation'));
 
-        })
+    })
     </script>
 </body>
 
