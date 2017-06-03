@@ -7,11 +7,10 @@ body .roboto,
 .content,
 .btn,
 .bar,
-.side-nav {
-    font-family: 'Roboto', sans-serif;
-}
+.side-nav { font-family: 'Roboto', sans-serif;}
 .side-nav {}
 .side-nav li>a { padding-left: 15px; padding-right: 10px;}
+.side-nav .userView p { margin-bottom: 0;}
 body {
     display: flex;
     min-height: 100vh;
@@ -52,14 +51,17 @@ body {
 .content {
     background: none; position: relative; min-height: 400px; min-height: 75vh;
 }
-
-.content .btn {
-    margin-top: 12px;
+.btn {
     font-size: 20px;
-    color: #fff;
-    background-color: #999999;
     border-radius: 0;
-    /*font-family: 'Architects Daughter', cursive;*/
+    font-family: 'Rancho', cursive;
+}
+.content .btn {
+    /*margin-top: 12px;*/
+    font-size: 20px;
+    /*color: #fff;*/
+    /*background-color: #999999;*/
+    border-radius: 0;
     font-family: 'Rancho', cursive;
 }
 
@@ -77,11 +79,13 @@ body {
 
 .form-background {
     background: url("../images/input-back.png");
-    padding: 5px 5px 15px;
+    padding: 10px 5px 15px;
     margin-bottom: 15px;
 }
 
-
+.form-background fieldset {
+    margin-bottom: 10px;
+}
 /* 
 .footer-button {
     position: absolute;
@@ -141,7 +145,11 @@ body {
 
 .btn-block { width: 100%;}
 
-.modal.bottom-sheet .modal-content { padding: 10px;}
+.modal .modal-content { padding: 10px;}
+.modal .modal-footer { text-align: center;}
+.modal .modal-footer .btn,
+.modal .modal-footer .btn-large,
+.modal .modal-footer .btn-flat { float: none;}
 /*.content-padded .input-group { margin-left: -10px; margin-right: -10px;}*/
 
 /*datepicker*/
@@ -155,3 +163,4 @@ body {
 .card .card-reveal { padding: 8px 12px;}
 .card .card-content p { margin-bottom: 2px;}
 .card .card-reveal p { margin-top: 2px; margin-bottom: 0px;}
+.card .card-action a { text-transform: none !important;}
