@@ -164,3 +164,8 @@ body {
 .card .card-content p { margin-bottom: 2px;}
 .card .card-reveal p { margin-top: 2px; margin-bottom: 0px;}
 .card .card-action a { text-transform: none !important;}
+
+#newitems .collection-header { padding: 10px;}
+#newitems .collection-header h4,
+#newitems .collection-header h5 { margin: 0;}
+.collection .collection-item.row { padding-left: 10px; padding-right: 10px;}
