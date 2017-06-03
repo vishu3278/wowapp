@@ -52,10 +52,7 @@
                     <input type="text" id="name">
                     <label>Store Name</label>
                 </div>
-                <div class="input-field">
-                    <textarea id="address" class="materialize-textarea" data-length="120"></textarea>
-                    <label>Address</label>
-                </div>
+                
                 <div class="input-field">
                     <input type="text" id="person">
                     <label>Contact Person</label>
@@ -68,6 +65,29 @@
                     <input type="email" id="email" class="validate">
                     <label data-error="Invalid email">Email</label>
                 </div>
+                <div class="input-field">
+                    <textarea id="address" class="materialize-textarea" data-length="120"></textarea>
+                    <label>Address</label>
+                </div>
+                <div class="input-field">
+                    <select name="country" id="country" class="browser-default">
+                        <option value="0">Select Country</option>
+                        <option value="1">India</option>
+                    </select>
+                </div>
+                <div class="input-field">
+                    <select name="state" id="state" class="browser-default">
+                        <option value="0">Select State</option>
+                        <option value="1">Delhi</option>
+                        <option value="2">Uttar Pradesh</option>
+                        <option value="3">Haryana</option>
+                    </select>
+                </div>
+                <div class="input-field">
+                    <select name="cityList" id="cityList" class="browser-default">
+                        <option value="0">Select City</option>
+                    </select>
+                </div>
                 <!-- <div class="input-field">
                     <select name="category" id="category">
                         <option value="1">Grocery</option>
@@ -78,7 +98,7 @@
                     <label>Type of Store</label>
                 </div> -->
                 <!-- <div class="input-field hide" id="otherInput">
-                    <input type="text">
+                    <input type="text" id="autoCity" class="autocomplete">
                     <label>Other Category</label>
                 </div> -->
                 <div class="input-field">
@@ -95,7 +115,7 @@
         </form>
     </div>
     <!-- <a class="waves-effect waves-light btn" href="#modal1">Modal</a> -->
-    <div id="modal1" class="modal bottom-sheet">
+    <div id="modal1" class="modal ">
         <div class="modal-content">
             
         </div>
@@ -105,6 +125,46 @@
     </div>
     <script type="text/javascript">
     $(function($) {
+
+        var citylist;
+
+        $.ajax({
+            url: 'http://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/city_list.php',
+            type: 'POST',
+            crossDomain: true,
+            // data: JSON.stringify(data),
+            success: function(result) {
+                if (result.status == 1) {
+                    var citydata = result.data;
+                    citylist = result.data;
+                    console.info(citylist);
+                    var cityopts = [];
+                    for (var i = 0; i < citydata.length; i++) {
+                        cityopts.push("<option value='"+citydata[i].city_id+"'>"+citydata[i].city_name+"</option>");
+                    };
+                    $("#cityList").html(cityopts.join(''));
+
+                    /*var autocity = {};
+                    for (var i = 0; i < citylist.length; i++) {
+                        autocity[citylist[i].city_name] = null;
+                    };
+                    $('#autoCity').autocomplete({
+                        data: autocity,
+                        limit: 20,
+                        minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+                    });*/
+                            
+                } else {
+                    // alert(result.status);
+                    $(".progress, .overlay").addClass("hide");
+                    $(".chip").removeClass("hide").html(result.error);
+                }
+            },
+            error: function() {
+                alert("Some error occured !")
+            }
+        });
+        var cityid = $("#cityList").val();
         var input = {
             "sales_person_id": "14",
             "name": "MegaMart",
@@ -112,7 +172,7 @@
             "cont_person": "Rohit Kumar",
             "date": "24-5-2017",
             "address": "Sector-16",
-            "city": "Sector-15",
+            "city": cityid,
             "state": "uttar pradesh",
             "country": "India",
             "pincode": "201301",
@@ -132,6 +192,7 @@
                 "name": name,
                 "phoneno": phoneno,
                 "cont_person": cont_person,
+                "email":email,
                 "date": date,
                 "address": address,
                 "city": "Sector-15",
@@ -158,7 +219,7 @@
                         $("#modal1 .modal-content").html("<p>"+result.data+"</p>");
                         $('#modal1').modal('open');
                         $(".progress, .overlay").addClass("hide");
-                        $("form.input-group").reset();
+                        $("form.input-group").trigger("reset");
                     } else {
                         // alert(result.status);
                         $(".progress, .overlay").addClass("hide");
@@ -170,6 +231,13 @@
                 }
             });
         })
+
+    /*$('#autoCity').autocomplete({
+        onAutocomplete: function(val) {
+            alert("You selected "+val);
+        }
+    });*/
+
     })
     </script>
 </body>
