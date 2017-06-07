@@ -85,7 +85,7 @@
             </ul>
         </div>
 
-        <form class="input-group">
+        <form id="itemsForm" class="input-group hide">
             <div class="form-background">
                 <!-- <fieldset>
                     <legend>Item(s)</legend>
@@ -226,7 +226,7 @@
                         stores.push("<option value='"+sdata[i].store_id+"'>"+sdata[i].store_name+" ("+sdata[i].store_id+")</option>");
                     };
                     
-                    console.info(storesObj);
+                    // console.info(storesObj);
                     // window.location.assign("home.html");
                     $("#storeList").html(stores.join(''));
                     $(".progress, .overlay").addClass("hide");
@@ -245,7 +245,7 @@
         $("#storeList").on('change', function() {
             var storeId = $(this).val();
             currStore = [];
-            sessionStorage.setItem('currStore',storeId);
+            sessionStorage.setItem('store_id',storeId);
             for (var i = 0; i < storesObj.length; i++) {
                 // console.log(storesObj[i].store_id);
                 if (storesObj[i].store_id == storeId) {
@@ -254,12 +254,24 @@
                     currStore.push("<li class='collection-item'><span class='title grey-text'>Address</span><br><strong>"+storesObj[i].store_address+", "+storesObj[i].store_city+", "+storesObj[i].store_state+", "+storesObj[i].store_country+"</strong></li>");
                     
                     $("#storeDetail").html(currStore).removeClass("hide");
+                    $("#itemsForm").removeClass("hide");
                 }
                 if(storeId == 0 || storeId == undefined){
                     $("#storeDetail").html("").addClass("hide");
+                    $("#itemsForm").addClass("hide");
                 }
             };
         });
+        
+        // method to check if store is selected 
+        /*function checkStore () {
+            if(sessionStorage.getItem('currStore')){
+                return sessionStorage.getItem('currStore');
+            }else{
+                alert("Please select store !");
+                return '';
+            };
+        }*/
 
         var catList; //category list object
 
@@ -327,7 +339,7 @@
                         // window.location.assign("home.html");
                         $("#itemList").html(prodArray.join(''));
                         $(".progress").addClass("hide");
-                        console.log(prodList);
+                        // console.log(prodList);
                     } else {
                         // alert(result.status);
                         $("#itemList").html('<option value="0">Select Item</option>');
@@ -367,24 +379,21 @@
         function grandTotal () {
             var grandtotal = 0;
             for (var i = orderItems.length - 1; i >= 0; i--) {
-                grandtotal += orderItems[i].subtotal;
+                grandtotal += Number(orderItems[i].subtotal);
             };
             console.log("grandTotal = "+grandtotal);
+            sessionStorage.setItem('gTotal',grandtotal);
             return grandtotal;
         }
 
         function total_Qty () {
             var totalqty = 0;
             for (var i = orderItems.length - 1; i >= 0; i--) {
-                totalqty += orderItems[i].product_qty;
+                totalqty += Number(orderItems[i].product_qty);
             };
             console.log("totalQty = "+totalqty);
             return totalqty;
         }
-
-        $("#itemQty").on('blur',function() {
-
-        });
 
         function calcSubtotal () {
             var prodQty = $("#itemQty").val();
@@ -405,9 +414,8 @@
             var prodPrice = $("#itemPrice").val();
             var subTotal = calcSubtotal();
             
-
-            var totalQty = total_Qty();
-            var grandPrice = grandTotal();
+            // var totalQty = total_Qty();
+            // var grandPrice = grandTotal();
 
             $("#itemSubtotal").val(subTotal);
 
@@ -454,6 +462,8 @@
 
             $("#newitems").html(cartitem.join(''));
             console.info(orderItems);
+            var grandPrice = grandTotal();
+
         });
 
         $("#orderNow").on('click',function() {
@@ -463,7 +473,7 @@
 
             var orderData = {
                 "sales_person_id": sessionStorage.getItem('sales_person_id'),
-                "store_id": sessionStorage.getItem('currStore'),
+                "store_id": sessionStorage.getItem('store_id'),
                 "total_qty": total_Qty(),
                 "grand_price": grandTotal(),
                 "items": orderItems
@@ -486,8 +496,9 @@
                     };
                 },
                 error: function() {
+                    alert("Some error occured in order API.");
                     $(".progress, .overlay").addClass("hide");
-                    $(".chip").removeClass("hide").html(result.error);
+                    $(".chip").addClass("hide").html('');
                 }
             })
             
