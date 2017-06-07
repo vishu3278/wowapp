@@ -116,7 +116,6 @@ body {
     background: none;
     font-family: 'Roboto', sans-serif;
 }
-
 .input-group select {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -125,6 +124,15 @@ body {
     background-size: 32px;
     font-size: 1em;
 }
+select:focus { outline: none;}
+
+label.error { display: none; visibility: hidden; opacity: 0;}
+/*label.error + label { color: #c00;}*/
+/*label.error + label.active { color: #999;}*/
+input.error + .error { color: #c00;}
+input.error + .error + label { color: #c00;}
+input.valid + label { color: #999;}
+input.error { border-bottom-color: #c00;}
 
 .order .btn-primary {
     border-radius: 0;
