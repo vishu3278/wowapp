@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/mobile.css">
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/jquery.validate.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
         // $('select').material_select();
@@ -22,11 +23,12 @@
             }
         });*/
         $('.modal').modal();
-        /*$('#modal1').modal({
-            complete:function() {
-                $("form.input-group").reset();
-            }
-        });*/
+        if (sessionStorage.getItem('sales_person_id')) {
+            console.log(sessionStorage.getItem('email'));
+        } else{
+            window.location.assign('login.html');
+        };
+
     });
     </script>
 </head>
@@ -45,47 +47,46 @@
             <div class="indeterminate"></div>
         </div>
         <div class="chip red lighten-3 hide" style="width:100%;">Invalid credentials !</div>
-        <form class="input-group" style="position:relative;">
+        <form id="regStore" class="input-group" style="position:relative;">
             <div class="overlay hide"></div>
             <div class="form-background">
                 <div class="input-field">
-                    <input type="text" id="name">
+                    <input type="text" name="name" id="name" required>
                     <label>Store Name</label>
                 </div>
                 
                 <div class="input-field">
-                    <input type="text" id="person">
+                    <input type="text" name="person" id="person" required>
                     <label>Contact Person</label>
                 </div>
                 <div class="input-field">
-                    <input type="tel" id="phone" class="validate">
-                    <label data-error="Invalid phone">Contact Number</label>
+                    <input type="tel" name="phone" id="phone"  required>
+                    <label >Contact Number</label>
                 </div>
                 <div class="input-field">
-                    <input type="email" id="email" class="validate">
-                    <label data-error="Invalid email">Email</label>
+                    <input type="email" name="email" id="email" required>
+                    <label >Email</label>
                 </div>
                 <div class="input-field">
-                    <textarea id="address" class="materialize-textarea" data-length="120"></textarea>
+                    <textarea name="address" id="address" required class="materialize-textarea" data-length="120"></textarea>
                     <label>Address</label>
                 </div>
                 <div class="input-field">
-                    <select name="country" id="country" class="browser-default">
-                        <option value="0">Select Country</option>
-                        <option value="1">India</option>
+                    <label for="country" class="active">Country</label>
+                    <select name="country" id="country" required class="browser-default">
+                        <option>Select Country</option>
                     </select>
                 </div>
                 <div class="input-field">
-                    <select name="state" id="state" class="browser-default">
-                        <option value="0">Select State</option>
-                        <option value="1">Delhi</option>
-                        <option value="2">Uttar Pradesh</option>
-                        <option value="3">Haryana</option>
+                    <label for="state" class="active">State</label>
+                    <select name="state" id="state" required class="browser-default">
+                        <option>Select State</option>
                     </select>
                 </div>
                 <div class="input-field">
-                    <select name="cityList" id="cityList" class="browser-default">
-                        <option value="0">Select City</option>
+                    <label for="cityList" class="active">City</label>
+                    <select name="cityList" id="cityList" required class="browser-default">
+                        <option>Select City</option>
                     </select>
                 </div>
                 <!-- <div class="input-field">
@@ -97,12 +98,12 @@
                     </select>
                     <label>Type of Store</label>
                 </div> -->
-                <!-- <div class="input-field hide" id="otherInput">
-                    <input type="text" id="autoCity" class="autocomplete">
-                    <label>Other Category</label>
-                </div> -->
+                <div class="input-field " >
+                    <input type="text" name="pin" id="pin" required>
+                    <label>PIN Code</label>
+                </div>
                 <div class="input-field">
-                    <textarea id="remarks" class="materialize-textarea" data-length="120"></textarea>
+                    <textarea name="remarks" id="remarks" class="materialize-textarea" data-length="120"></textarea>
                     <label>Remarks</label>
                 </div>
             </div>
@@ -125,34 +126,68 @@
     </div>
     <script type="text/javascript">
     $(function($) {
+        // form validation
+        $.validator.addMethod('regex', function(value, element, param) {
+            return this.optional(element) || value.match(typeof param == 'string' ? new RegExp(param) : param);
+        }, 'Invalid input format.');
+
+        var validator = $("#regStore").validate({
+                rules:{
+                    name:{
+                        required:true,
+                        minlength: 2,
+                        regex:/^[A-Za-z0-9 ]+$/
+                    },
+                    person:{
+                        required:true,
+                        minlength: 2,
+                        regex:/^[A-Za-z ]+$/
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    phone:{
+                        required: true,
+                        minlength: 10,
+                        maxlength:12,
+                        digits:true
+                    },
+                    address:{
+                        required:true,
+                        minlength: 3,
+                    },
+                    pin:{
+                        required:true,
+                        minlength:5,
+                        maxlength:6,
+                        regex:/^[A-Za-z0-9]+$/
+                    }
+                },
+
+            });
+
 
         var citylist;
+        var states;
+        var countries;
 
+        // ajax to fetch countries
         $.ajax({
-            url: 'http://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/city_list.php',
+            url: 'http://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/country_list.php',
             type: 'POST',
             crossDomain: true,
             // data: JSON.stringify(data),
             success: function(result) {
                 if (result.status == 1) {
-                    var citydata = result.data;
-                    citylist = result.data;
-                    console.info(citylist);
-                    var cityopts = [];
-                    for (var i = 0; i < citydata.length; i++) {
-                        cityopts.push("<option value='"+citydata[i].city_id+"'>"+citydata[i].city_name+"</option>");
+                    var ctry = result.data;
+                    countries = result.data;
+                    // console.info(citylist);
+                    var cityopts = ['<option>Select Country</option>'];
+                    for (var i = 0; i < ctry.length; i++) {
+                        cityopts.push("<option value='"+ctry[i].country_id+"'>"+ctry[i].country_name+"</option>");
                     };
-                    $("#cityList").html(cityopts.join(''));
-
-                    /*var autocity = {};
-                    for (var i = 0; i < citylist.length; i++) {
-                        autocity[citylist[i].city_name] = null;
-                    };
-                    $('#autoCity').autocomplete({
-                        data: autocity,
-                        limit: 20,
-                        minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
-                    });*/
+                    $("#country").html(cityopts.join(''));
                             
                 } else {
                     // alert(result.status);
@@ -161,82 +196,163 @@
                 }
             },
             error: function() {
-                alert("Some error occured !")
+                alert("Some error occured in country api!")
             }
         });
-        var cityid = $("#cityList").val();
-        var input = {
-            "sales_person_id": "14",
-            "name": "MegaMart",
-            "phoneno": "9889897860",
-            "cont_person": "Rohit Kumar",
-            "date": "24-5-2017",
-            "address": "Sector-16",
-            "city": cityid,
-            "state": "uttar pradesh",
-            "country": "India",
-            "pincode": "201301",
-            "remark": "Reliable Store",
-            "status": "enabled"
-        };
+
+        // ajax to fetch state/province
+        $.ajax({
+            url: 'http://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/provience.php',
+            type: 'POST',
+            crossDomain: true,
+            // data: JSON.stringify(data),
+            success: function(result) {
+                if (result.status == 1) {
+                    var state = result.data;
+                    states = result.data;
+                    // console.info(citylist);
+                    /*var cityopts = ['<option>Select State/Province</option>'];
+                    for (var i = 0; i < state.length; i++) {
+                        cityopts.push("<option value='"+state[i].region_id+"'>"+state[i].state_name+"</option>");
+                    };
+                    $("#state").html(cityopts.join(''));*/
+                            
+                } else {
+                    // alert(result.status);
+                    $(".progress, .overlay").addClass("hide");
+                    $(".chip").removeClass("hide").html(result.error);
+                }
+            },
+            error: function() {
+                alert("Some error occured in state api!")
+            }
+        });
+
+        // ajax to fetch cities
+        $.ajax({
+            url: 'http://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/cities.php',
+            type: 'POST',
+            crossDomain: true,
+            // data: JSON.stringify(data),
+            success: function(result) {
+                if (result.status == 1) {
+                    var citydata = result.data;
+                    citylist = result.data;
+                    // console.info(citylist);
+                    /*var cityopts = ['<option>Select City</option>'];
+                    for (var i = 0; i < citydata.length; i++) {
+                        cityopts.push("<option value='"+citydata[i].city_id+"'>"+citydata[i].city_name+"</option>");
+                    };
+                    $("#cityList").html(cityopts.join(''));*/
+                            
+                } else {
+                    // alert(result.status);
+                    $(".progress, .overlay").addClass("hide");
+                    $(".chip").removeClass("hide").html(result.error);
+                }
+            },
+            error: function() {
+                alert("Some error occured in cities api!")
+            }
+        });
+
+        $("#country").on('change', function() {
+            var ctrid = $(this).val();
+            var filterstates = [];
+            for (var i = 0; i < states.length; i++) {
+                if (states[i].country_id == ctrid) {
+                    filterstates.push('<option value="'+states[i].region_id+'">'+states[i].state_name+'</option>');
+                };
+            };
+            if (filterstates.length < 1) {
+                $("#state").html("<option>No States found</option>");
+            } else{
+                $("#state").html(filterstates.join(''));
+            };
+        });
+
+        $("#state").on('change', function() {
+            var stateid = $(this).val();
+            var filtercity = [];
+            for (var i = 0; i < states.length; i++) {
+                if (citylist[i].state_id == stateid) {
+                    filtercity.push('<option value="'+citylist[i].city_id+'">'+citylist[i].city_name+'</option>');
+                };
+            };
+            if (filtercity.length < 1) {
+                $("#cityList").html("<option>No cities found</option>");
+            } else{
+                $("#cityList").html(filtercity.join(''));
+            };
+        });
+
+        // final registration action
         $("#register").on('click', function() {
-            var name = $("#name").val(),
+            
+            // console.log(validator.form());
+
+            if (validator.form()) {
+                var name = $("#name").val(),
                 address = $("#address").val(),
                 cont_person = $("#person").val(),
                 phoneno = $("#phone").val(),
                 email = $("#email").val(),
                 remark = $("#remarks").val()
-            date = new Date();
-            var data = {
-                "sales_person_id": sessionStorage.getItem('sales_person_id'),
-                "name": name,
-                "phoneno": phoneno,
-                "cont_person": cont_person,
-                "email":email,
-                "date": date,
-                "address": address,
-                "city": "Sector-15",
-                "state": "uttar pradesh",
-                "country": "India",
-                "pincode": "201301",
-                "remark": remark,
-                "status": "enabled"
-            }
+                date = new Date(),
+                countryid = $("#country").val(),
+                stateid = $("#state").val(),
+                cityid = $("#cityList").val(),
+                pin = $("#pin").val();
 
-            console.log(JSON.stringify(data));
-
-            $(".progress, .overlay").removeClass("hide");
-
-            $.ajax({
-                url: 'http://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/storeadd.php',
-                type: 'POST',
-                crossDomain: true,
-                data: JSON.stringify(data),
-                success: function(result) {
-                    if (result.status == 1) {
-                        
-                        // window.location.assign("home.html");
-                        $("#modal1 .modal-content").html("<p>"+result.data+"</p>");
-                        $('#modal1').modal('open');
-                        $(".progress, .overlay").addClass("hide");
-                        $("form.input-group").trigger("reset");
-                    } else {
-                        // alert(result.status);
-                        $(".progress, .overlay").addClass("hide");
-                        $(".chip").removeClass("hide").html(result.error);
-                    }
-                },
-                error: function() {
-                    alert("Some error occured !")
+                var data = {
+                    "sales_person_id": sessionStorage.getItem('sales_person_id'),
+                    "name": name,
+                    "phoneno": phoneno,
+                    "cont_person": cont_person,
+                    "email":email,
+                    "date": date,
+                    "address": address,
+                    "city": cityid,
+                    "state": stateid,
+                    "country": countryid,
+                    "pincode": pin,
+                    "remark": remark,
+                    "status": "enabled"
                 }
-            });
-        })
 
-    /*$('#autoCity').autocomplete({
-        onAutocomplete: function(val) {
-            alert("You selected "+val);
-        }
-    });*/
+                // console.log(JSON.stringify(data));
+
+                $(".progress, .overlay").removeClass("hide");
+
+                $.ajax({
+                    url: 'http://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/storeadd.php',
+                    type: 'POST',
+                    crossDomain: true,
+                    data: JSON.stringify(data),
+                    success: function(result) {
+                        if (result.status == 1) {
+                            
+                            // window.location.assign("home.html");
+                            $("#modal1 .modal-content").html("<p>"+result.data+"</p>");
+                            $('#modal1').modal('open');
+                            $(".progress, .overlay").addClass("hide");
+                            $("form.input-group").trigger("reset");
+                        } else {
+                            // alert(result.status);
+                            $(".progress, .overlay").addClass("hide");
+                            $(".chip").removeClass("hide").html(result.error);
+                        }
+                    },
+                    error: function() {
+                        alert("Some error occured in adding store api!")
+                    }
+                });
+            } else{
+                $("#modal1 .modal-content").html("<p>Invalid form values. Please fill form with correct values.</p>");
+                $('#modal1').modal('open');
+            };
+ 
+        })
 
     })
     </script>
