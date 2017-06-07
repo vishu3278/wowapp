@@ -73,8 +73,8 @@ body {
 
 .order {
     background: url("../images/home-logo.png") no-repeat center;
-    background-size: 100%;
-    background-position: inherit;
+    background-size: 90%;
+    /*background-position: center;*/
 }
 
 .form-background {
