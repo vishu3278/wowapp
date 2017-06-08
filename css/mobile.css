@@ -152,6 +152,8 @@ input.error { border-bottom-color: #c00;}
 }
 
 .btn-block { width: 100%;}
+.btn-floating.small { width: 32px; height: 32px; line-height: 32px;}
+.btn-floating.small i { line-height: 32px;}
 
 .modal .modal-content { padding: 10px;}
 .modal .modal-footer { text-align: center;}
