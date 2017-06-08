@@ -165,9 +165,10 @@
             <div class="row">
                 <div class="col s6">
                     <div class="input-field">
-                <input type="number" name="itemQty" id="itemQty" min="0">
-                <label>Qty,/Ctn</label>
-            </div>
+                        <input type="text" name="avQty" id="avQty" placeholder="Availabel Qty" readonly="true">
+                        <label class="active">Available Qty</label>
+                    </div>
+                    
                 </div>
                 <div class="col s6">
                     <div class="input-field">
@@ -179,8 +180,8 @@
             <div class="row">
                 <div class="col s6">
                     <div class="input-field">
-                        <input type="text" name="avQty" id="avQty" placeholder="Availabel Qty" readonly="true">
-                        <label class="active">Available Qty</label>
+                        <input type="number" name="itemQty" id="itemQty" min="0">
+                        <label>Qty,/Ctn</label>
                     </div>
                 </div>
                 <div class="col s6">
@@ -213,7 +214,7 @@
             url: 'http://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/store_list.php',
             type: 'POST',
             crossDomain: true,
-            data: JSON.stringify(sData),
+            // data: JSON.stringify(sData),
             success: function(result) {
                 if (result.status == 1) {
                     // alert(result.data[0].first_name);
@@ -450,7 +451,7 @@
             // console.info(orderItems);
             var cartitem = [];
             for (var i = 0; i < orderItems.length; i++) {
-                cartitem.push('<ul id="'+orderItems[i].product_id+'" class="collection with-header"><li class="collection-header"><h5 class="pink-text text-darken-2">'+orderItems[i].item_name+'</h5><h6 class="title">'+orderItems[i].category_name+'</h6></li><li class="collection-item row"><div class="col s6"><label>Model No.</label><br>'+orderItems[i].item_model_no+'</div><div class="col s6"><label>Item Code</label><br>'+orderItems[i].item_code+'</div></li><li class="collection-item row"><div class="col s4"><label>Price</label><br>'+orderItems[i].product_price+'</div><div class="col s4"><label>Qty</label><br>'+orderItems[i].product_qty+'</div><div class="col s4"><label>Subtotal</label><br>'+orderItems[i].subtotal+'</div></li></ul>');
+                cartitem.push('<ul id="'+orderItems[i].product_id+'" class="collection with-header"><li class="collection-header"><a class="btn-floating small close red lighten-2 right waves-effect"><i class="mdi-close"></i></a><h5 class="pink-text text-darken-2">'+orderItems[i].item_name+'</h5><h6 class="title">'+orderItems[i].category_name+'</h6></li><li class="collection-item row"><div class="col s6"><label>Model No.</label><br>'+orderItems[i].item_model_no+'</div><div class="col s6"><label>Item Code</label><br>'+orderItems[i].item_code+'</div></li><li class="collection-item row"><div class="col s4"><label>Price</label><br>'+orderItems[i].product_price+'</div><div class="col s4"><label>Qty</label><br>'+orderItems[i].product_qty+'</div><div class="col s4"><label>Subtotal</label><br>'+orderItems[i].subtotal+'</div></li></ul>');
                 /*orderItems[i].product_id;
                 orderItems[i].categeory_id;
                 orderItems[i].product_price;
@@ -464,6 +465,18 @@
             console.info(orderItems);
             var grandPrice = grandTotal();
 
+        });
+
+        $("#newitems").on('click','a.close',function() {
+            var item = $(this).closest('.collection');
+            item.remove();
+            item.attr('id');
+            for (var i = orderItems.length - 1; i >= 0; i--) {
+                if(orderItems[i].product_id == item.attr('id')){
+                    orderItems.splice([i],1);
+                }
+            };
+            console.info(orderItems);
         });
 
         $("#orderNow").on('click',function() {

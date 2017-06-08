@@ -37,7 +37,8 @@
                 <!-- <li><a class="subheader">Subheader</a></li> -->
                 <li><a class="waves-effect" href="order.html"><i class="mdi-event_note orange-text"></i> Order Note</a></li>
                 <li><a class="waves-effect" href="register.html"><i class="mdi-playlist_add orange-text"></i> Register Store</a></li>
-                <li><a class="waves-effect" href="stores.html"><i class="mdi-list orange-text"></i> Stores</a></li>
+                <li><a class="waves-effect" href="stores.html"><i class="mdi-list orange-text"></i> All Stores</a></li>
+                <li><a class="waves-effect" href="mystores.html"><i class="mdi-list orange-text"></i> My Stores</a></li>
                 <li><a class="waves-effect" id="logout" href="index.html"><i class="mdi-exit_to_app red-text"></i> Logout</a></li>
             </ul>
             <ul class="right">
@@ -64,10 +65,15 @@
             draggable: true
         });
 
-        $("#fullname").html(sessionStorage.getItem('first_name') + sessionStorage.getItem('last_name'));
-        $("#email").html(sessionStorage.getItem('email'));
-        $("#phone").html(sessionStorage.getItem('phoneno'));
-        $("#designation").html(sessionStorage.getItem('designation'));
+        if (sessionStorage.getItem('sales_person_id')) {
+            $("#fullname").html(sessionStorage.getItem('first_name') + sessionStorage.getItem('last_name'));
+            $("#email").html(sessionStorage.getItem('email'));
+            $("#phone").html(sessionStorage.getItem('phoneno'));
+            $("#designation").html(sessionStorage.getItem('designation'));
+        } else{
+            window.location.assign('login.html');
+        };
+        
 
     })
     </script>

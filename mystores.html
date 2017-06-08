@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>MMSApp Order Page</title>
+    <title>MMSApp Stores Page</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons" > -->
     <link rel="stylesheet" href="css/material-icons.css">
@@ -25,7 +25,7 @@
 <body>
     <nav>
         <div class="nav-wrapper pink darken-4">
-            <a href="#!" class="brand-logo center">All Stores</a>
+            <a href="#!" class="brand-logo center">My Stores</a>
             <ul id="nav-mobile" class="left">
                 <li><a href="home.html"><i class="mdi-arrow_back "></i></a></li>
             </ul>
@@ -56,12 +56,12 @@
             url: 'http://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/store_list.php',
             type: 'POST',
             crossDomain: true,
-            // data: JSON.stringify(data),
+            data: JSON.stringify(data),
             success: function(result) {
                 if (result.status == 1) {
                     // alert(result.data[0].first_name);
                     var sdata = result.data;
-                    // console.log(result.data);
+                    console.log(result.data);
                     var stotal = ("<h5 class='center-align'>"+result.total+" stores found</h5>");
                     var stores = $("<div class='abc'/>");
                     for (var i = sdata.length - 1; i >= 0; i--) {
