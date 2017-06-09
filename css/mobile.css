@@ -20,6 +20,7 @@ body {
 .container {
     margin: 15px auto;
 }
+.no-padding { padding: 0;}
 .overlay { position: absolute; width: 100%; height: 100%; left: 0; right: 0; top: 0; bottom: 0; z-index: 99; background: rgba(100,100,100,0.5);}
 .splash {
     background-image: url("../images/splash-back.png");
@@ -174,8 +175,14 @@ input.error { border-bottom-color: #c00;}
 .card .card-content p { margin-bottom: 2px;}
 .card .card-reveal p { margin-top: 2px; margin-bottom: 0px;}
 .card .card-action a { text-transform: none !important;}
+.card .card-content.no-padding,
+ .card .card-action.no-padding { padding: 0;}
 
 #newitems .collection-header { padding: 10px;}
 #newitems .collection-header h4,
 #newitems .collection-header h5 { margin: 0;}
 .collection .collection-item.row { padding-left: 10px; padding-right: 10px;}
+
+.order-history .collection .collection-header,
+.order-history .collection .collection-item { padding-left: 10px; padding-right: 10px;}
+.order-history .collection .collection-item { padding-top: 5px; padding-bottom: 5px;}
