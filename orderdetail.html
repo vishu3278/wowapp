@@ -103,11 +103,14 @@
                     console.log(result.data);
                     var stotal = ("<h5 class='center-align'>" + sessionStorage.getItem('order_id') + "</h5>");
                     var stores = $("<div class='order-history'/>");
-                    for (var i = sdata.length - 1; i >= 0; i--) {
+                    
+                    var clss = (sdata[0].status == "complete") ? "green-text" : "red-text";
+                    var clsp = (sdata[0].payment_status == "paid") ? "green-text" : "red-text";
+                    stores.append('<table class="bordered"><tbody><tr><td colspan="2"><label>StoreName</label><br>'+sdata[0].store_name+'</td></tr><tr><td colspan="2"><label>Address</label><br>'+sdata[0].address+'</td></tr><tr><td colspan="2"><label>Order Date</label><br>' + sdata[0].order_date + '</td></tr><tr><td colspan="2"><label>Salesperson</label><br>' + sdata[0].sales_person_name + '</td></tr><tr><td><label>Total QTY</label><br>' + sdata[0].total_qty + '</td><td><label>Grand Total</label><br>' + sdata[0].grand_price + '</td></tr><tr><td><label>Payment Status</label><br><span class="' + clsp + '">' + sdata[0].payment_status + '</span></td><td><label>Order Status</label><br><span class="' + clss + '">' + sdata[0].status + '</span></td></tr></tbody></table>');
+                    // sdata[0].store_name;
+                    for (var i = 1; i < sdata.length; i++) {
                         // sdata[i];
-                        var clss = (sdata[i].status == "complete") ? "green-text" : "red-text";
-                        var clsp = (sdata[i].payment_status == "paid") ? "green-text" : "red-text";
-                        stores.append('<ul class="collection with-header"><li class="collection-header "></li><li class="collection-item"><label>Store Name & Address</label><br>' + sdata[i].store_name + '<br>' + sdata[i].store_address + '</li><li class="collection-item"><label>Salesperson</label><br>' + sdata[i].sales_person_name + '</li><li class="collection-item"><label>Order Date</label><br>' + sdata[i].order_date + '</li><li class="collection-item"><div class="row"><div class="col s4"><img src="images/logo.png" class="responsive-img" alt="img"></div><div class="col s8"><h6>P Name</h6>Model<br>Item Code</div></div><div class="row"><div class="col s4"><label>Price</label><br>'+sdata[i].product_price+'</div><div class="col s4"><label>Qty</label><br>'+sdata[i].product_qty+'</div><div class="col s4"><label>Subtotal</label><br>'+sdata[i].subtotal+'</div></div></li><li class="collection-item row"><div class="col s6"><label>Total QTY</label><br>' + sdata[i].total_qty + '</div><div class="col s6"><label>Grand Total</label><br>' + sdata[i].grand_price + '</div></li><li class="collection-item row"><div class="col s6"><label>Payment Status</label><br><span class="' + clsp + '">' + sdata[i].payment_status + '</span></div><div class="col s6"><label>Order Status</label><br><span class="' + clss + '">' + sdata[i].status + '</span></div></li></ul>');
+                        stores.append('<ul class="collection"><li class="collection-item"><div class="row"><div class="col s4"><img src="images/logo.png" class="responsive-img" alt="img"></div><div class="col s8"><h6>'+sdata[i].product_id+'</h6>'+sdata[i].order_item_id+'<br>Item Code</div></div><div class="row"><div class="col s4"><label>Price</label><br>'+sdata[i].product_price+'</div><div class="col s4"><label>Qty</label><br>'+sdata[i].product_qty+'</div><div class="col s4"><label>Subtotal</label><br>'+sdata[i].subtotal+'</div></div></li></ul>');
                     };
 
                     // window.location.assign("home.html");
