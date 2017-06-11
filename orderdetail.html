@@ -41,46 +41,7 @@
         <div class="chip red lighten-3 hide" style="width:100%;">Invalid data !</div>
         <div class="overlay hide"></div>
         <div id="storelist">
-            <ul class="collection with-header">
-                <li class="collection-header "></li>
-                <li class="collection-item">
-                    <label>Store Name & Address</label>
-                    <br>'+sdata[i].store_name+'
-                    <br>'+sdata[i].store_address+'</li>
-                <li class="collection-item">
-                    <label>Salesperson</label>
-                    <br>'+sdata[i].sales_person_name+'</li>
-                <li class="collection-item">
-                    <label>Order Date</label>
-                    <br>'+sdata[i].order_date+'</li>
-                <li class="collection-item">
-                    <div class="row">
-                        <div class="col s4"><img src="" alt=""></div>
-                        <div class="col 8"><h6>P Name</h6>Model<br>Item Code</div>
-                    </div>
-                    <div class="row">
-                        <div class="col s4">Price</div>
-                        <div class="col s4">Qty</div>
-                        <div class="col s4">Subtotal</div>
-                    </div>
-                </li>
-                <li class="collection-item row">
-                    <div class="col s6">
-                        <label>Total QTY</label>
-                        <br>'+sdata[i].total_qty+'</div>
-                    <div class="col s6">
-                        <label>Grand Price</label>
-                        <br>'+sdata[i].grand_price+'</div>
-                </li>
-                <li class="collection-item row">
-                    <div class="col s6">
-                        <label>Payment Status</label>
-                        <br><span class="'+clsp+'">'+sdata[i].payment_status+'</span></div>
-                    <div class="col s6">
-                        <label>Order Status</label>
-                        <br><span class="'+clss+'">'+sdata[i].status+'</span></div>
-                </li>
-            </ul>
+            
         </div>
     </div>
     <script type="text/javascript">
@@ -110,7 +71,13 @@
                     // sdata[0].store_name;
                     for (var i = 1; i < sdata.length; i++) {
                         // sdata[i];
-                        stores.append('<ul class="collection"><li class="collection-item"><div class="row"><div class="col s4"><img src="images/logo.png" class="responsive-img" alt="img"></div><div class="col s8"><h6>'+sdata[i].product_id+'</h6>'+sdata[i].order_item_id+'<br>Item Code</div></div><div class="row"><div class="col s4"><label>Price</label><br>'+sdata[i].product_price+'</div><div class="col s4"><label>Qty</label><br>'+sdata[i].product_qty+'</div><div class="col s4"><label>Subtotal</label><br>'+sdata[i].subtotal+'</div></div></li></ul>');
+                        var pimg;
+                        if (sdata[i].product_image) {
+                            pimg = 'http://wowitsolutions.com/mmsMobile/images/test_pic/'+sdata[i].product_image;
+                        } else{
+                            pimg = 'images/logo.png';
+                        };
+                        stores.append('<ul class="collection"><li class="collection-item row"><div class="col s4"><img src="'+pimg+'" class="responsive-img" alt="img"></div><div class="col s8"><h6>'+sdata[i].product_name+'</h6><p>'+sdata[i].product_categeory+'</p>'+sdata[i].product_model_no+'<br>'+sdata[i].product_code+'</div></li><li class="collection-item row"><div class="col s4"><label>Price</label><br>'+sdata[i].product_price+'</div><div class="col s4"><label>Qty</label><br>'+sdata[i].product_qty+'</div><div class="col s4"><label>Subtotal</label><br>'+sdata[i].subtotal+'</div></li></ul>');
                     };
 
                     // window.location.assign("home.html");
