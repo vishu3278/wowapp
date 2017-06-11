@@ -186,3 +186,7 @@ input.error { border-bottom-color: #c00;}
 .order-history .collection .collection-header,
 .order-history .collection .collection-item { padding-left: 10px; padding-right: 10px;}
 .order-history .collection .collection-item { padding-top: 5px; padding-bottom: 5px;}
+
+.order-history td, 
+.order-history th { padding: 5px 0;}
+.order-history p { margin: 0 0 3px;}
