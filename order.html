@@ -87,44 +87,11 @@
 
         <form id="itemsForm" class="input-group hide">
             <div class="form-background">
-                <!-- <fieldset>
-                    <legend>Item(s)</legend>
-                    <div class="input-field">
-                        <select name="prodCat" id="prodCat" class="browser-default">
-                            <option value="0">Choose category</option>
-                        </select>
-                        <label class="active">Category</label>
-                    </div>
-                    <div class="input-field">
-                        <select name="itemList" id="itemList" class="browser-default">
-                            <option value="0">Select Item</option>
-                        </select>
-                        <label class="active">Particular</label>
-                    </div>
-                    <div class="input-field">
-                        <input type="number" name="itemQty" id="itemQty" min="0">
-                        <label>Qty,/Ctn</label>
-                    </div>
-                    <div class="input-field">
-                        <input type="number" name="itemPrice" id="itemPrice" min="0">
-                        <label>Price</label>
-                    </div>
-                    <div class="input-field">
-                        <input type="text" name="itemSubtotal" id="itemSubtotal" placeholder="Subtotal" readonly="true" >
-                        <label class="active">Subtotal</label>
-                    </div>
-                </fieldset> -->
-                <!-- <button type="button" id="addMoreItem" class="btn green waves-effect"><i class="mdi-add"></i> Add Item</button> -->
+                
                 <div id="newitems">
-                    <!-- <ul id="" class="collection with-header">
-                        <li class="collection-header"><h5 class="pink-text text-darken-2">name</h5></li>
-                        <li class="collection-item">category</li>
-                        <li class="collection-item">price</li>
-                        <li class="collection-item">qty</li>
-                        <li class="collection-item">subtotal</li>
-                    </ul> -->
+                    
                 </div>
-                <p class="center-align"><a href="#addItem" class="btn-floating btn-large green waves-effect"><i class="mdi-add"></i> Add Item</a><br>Add Item</p>
+                <p class="center-align">Add Item<br><a href="#addItem" class="btn-floating btn-large green waves-effect"><i class="mdi-add"></i> Add Item</a></p>
             </div>
             <div class="footer-button">
                 <div class="input-field">
@@ -224,7 +191,7 @@
                     var stores = ['<option value="0">Select Store</option>'];
                     for (var i = sdata.length - 1; i >= 0; i--) {
                         // sdata[i];
-                        stores.push("<option value='"+sdata[i].store_id+"'>"+sdata[i].store_name+" ("+sdata[i].store_id+")</option>");
+                        stores.push("<option value='"+sdata[i].store_id+"'>"+sdata[i].store_name+"</option>");
                     };
                     
                     // console.info(storesObj);

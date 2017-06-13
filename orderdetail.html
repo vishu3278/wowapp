@@ -65,9 +65,9 @@
                     var stotal = ("<h5 class='center-align'>" + sessionStorage.getItem('order_id') + "</h5>");
                     var stores = $("<div class='order-history'/>");
                     
-                    var clss = (sdata[0].status == "complete") ? "green-text" : "red-text";
-                    var clsp = (sdata[0].payment_status == "paid") ? "green-text" : "red-text";
-                    stores.append('<table class="bordered"><tbody><tr><td colspan="2"><label>StoreName</label><br>'+sdata[0].store_name+'</td></tr><tr><td colspan="2"><label>Address</label><br>'+sdata[0].address+'</td></tr><tr><td colspan="2"><label>Order Date</label><br>' + sdata[0].order_date + '</td></tr><tr><td colspan="2"><label>Salesperson</label><br>' + sdata[0].sales_person_name + '</td></tr><tr><td><label>Total QTY</label><br>' + sdata[0].total_qty + '</td><td><label>Grand Total</label><br>' + sdata[0].grand_price + '</td></tr><tr><td><label>Payment Status</label><br><span class="' + clsp + '">' + sdata[0].payment_status + '</span></td><td><label>Order Status</label><br><span class="' + clss + '">' + sdata[0].status + '</span></td></tr></tbody></table>');
+                    var clss = (sdata[0].status == "complete") ? "green" : "red";
+                    var clsp = (sdata[0].payment_status == "paid") ? "green" : "red";
+                    stores.append('<table class="bordered"><tbody><tr><td colspan="2"><label>StoreName</label><br><h5 class="title pink-text">'+sdata[0].store_name+'</h5></td></tr><tr><td colspan="2"><label>Address</label><br>'+sdata[0].address+'</td></tr><tr><td colspan="2"><label>Order Date</label><br>' + sdata[0].order_date + '</td></tr><tr><td colspan="2"><label>Salesperson</label><br>' + sdata[0].sales_person_name + '</td></tr><tr><td><label>Total QTY</label><br>' + sdata[0].total_qty + '</td><td><label>Grand Total</label><br>' + sdata[0].grand_price + '</td></tr><tr><td><label>Payment Status</label><br><span class="tag ' + clsp + '">' + sdata[0].payment_status + '</span></td><td><label>Order Status</label><br><span class="tag ' + clss + '">' + sdata[0].status + '</span></td></tr></tbody></table>');
                     // sdata[0].store_name;
                     for (var i = 1; i < sdata.length; i++) {
                         // sdata[i];
