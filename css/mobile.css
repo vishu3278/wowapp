@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+/*@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');*/
 /*@import url('https://fonts.googleapis.com/css?family=Architects+Daughter');*/
 @import url('https://fonts.googleapis.com/css?family=Rancho');
 .rancho {font-family: 'Rancho', cursive;}
@@ -172,7 +172,7 @@ input.error { border-bottom-color: #c00;}
 
 .card .collection { margin-left: -13px; margin-right: -13px; margin-bottom: 0;}
 .card .collection .collection-item { padding-top: 6px; padding-right: 12px; padding-bottom: 6px; }
-.card .card-title { font-family: 'Rancho', cursive;}
+.card .card-title, .order-history .title { font-family: 'Rancho', cursive; margin-top: 0; margin-bottom: 5px;}
 .card .card-content { min-height: 150px;}
 .card .card-content,
 .card .card-action,
@@ -192,6 +192,9 @@ input.error { border-bottom-color: #c00;}
 .order-history .collection .collection-item { padding-left: 10px; padding-right: 10px;}
 .order-history .collection .collection-item { padding-top: 5px; padding-bottom: 5px;}
 
+
 .order-history td, 
 .order-history th { padding: 5px 0;}
 .order-history p { margin: 0 0 3px;}
+
+.tag { padding: 1px 6px 2px; font-size: 14px; line-height: normal; color: #fff; display: inline-block; background: #f3f3f3; border-radius: 2px;}
