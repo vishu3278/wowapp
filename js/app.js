@@ -4,7 +4,6 @@ function deviceReady () {
 
 function onDeviceReady() {
     document.addEventListener("backbutton", onBackKeyDown, false);
-    checkConnection();
 }
 
 function onBackKeyDown() {
@@ -27,6 +26,7 @@ function checkConnection() {
     states[Connection.NONE]     = 'No network connection';
 
     alert('Connection type: ' + states[networkState]);
+
 }
 
 // document.addEventListener("deviceready", onDeviceReady, false);
