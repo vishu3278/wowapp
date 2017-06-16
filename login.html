@@ -10,10 +10,17 @@
     <link rel="stylesheet" href="css/material-icons.css">
     <link rel="stylesheet" type="text/css" href="css/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="css/mobile.css">
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
     <script type="text/javascript">
-        document.addEventListener("backbutton", onBackKeyDown, false);
+    
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        function onDeviceReady() {
+            document.addEventListener("backbutton", onBackKeyDown, false);
+        }
+        
 
         function onBackKeyDown() {
             // Handle the back button
