@@ -16,13 +16,7 @@
         $(function () {
             sessionStorage.clear();
         });
-
-        document.addEventListener("deviceready", onDeviceReady, false);
-        function onDeviceReady() {
-            alert(device.cordova);
-            checkConnection();
-        }
-
+        
         function checkConnection() {
             var networkState = navigator.connection.type;
 
@@ -38,6 +32,15 @@
 
             alert('Connection type: ' + states[networkState]);
         }
+
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        function onDeviceReady() {
+            alert("Model = "+device.model + " Manufacturer = " + device.manufacturer);
+            checkConnection();
+        }
+
+        
 
         
 
