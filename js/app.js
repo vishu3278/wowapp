@@ -4,11 +4,20 @@ function deviceReady () {
 
 function onDeviceReady() {
     document.addEventListener("backbutton", onBackKeyDown, false);
+    document.addEventListener("offline", onOffline, false);
+	document.addEventListener("online", onOnline, false);
 }
 
-function onBackKeyDown() {
+function onBackKeyDown(e) {
     // Handle the back button
-    navigator.app.exitApp();
+    // e.preventDefault();
+    if(window.location.hash=='#home'){
+        e.preventDefault();
+        navigator.app.exitApp();
+    } else {
+        navigator.app.backHistory()
+    }
+    // navigator.app.exitApp();
     // navigator.app.backHistory();
 }
 
@@ -35,3 +44,20 @@ function checkConnection() {
     alert("Model = "+device.model + " Manufacturer = " + device.manufacturer);
     checkConnection();
 }*/
+
+function onOnline() {
+    // Handle the online event
+    var networkState = navigator.connection.type;
+
+    if (networkState !== Connection.NONE) {
+        alert("You are not connected to internet.")
+    }
+    // display('Connection type: ' + networkState);
+}
+
+function onOffline() {
+    // Handle the offline event
+    // console.log("lost connection");
+    alert("You lost internet connection.")
+}
+
