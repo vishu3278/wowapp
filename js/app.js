@@ -6,6 +6,7 @@ function onDeviceReady() {
     document.addEventListener("backbutton", onBackKeyDown, false);
     document.addEventListener("offline", onOffline, false);
 	document.addEventListener("online", onOnline, false);
+	alert(window.location.hash);
 }
 
 function onBackKeyDown(e) {
