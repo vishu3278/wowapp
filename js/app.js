@@ -6,13 +6,14 @@ function onDeviceReady() {
     document.addEventListener("backbutton", onBackKeyDown, false);
     document.addEventListener("offline", onOffline, false);
 	document.addEventListener("online", onOnline, false);
-	alert(window.location.hash);
+	alert($("body").attr("id"));
 }
 
 function onBackKeyDown(e) {
     // Handle the back button
     // e.preventDefault();
-    if(window.location.hash=='#home' || window.location.hash=='#login'){
+    var bodyid = $("body").attr("id");
+    if(window.location.hash=='#home'){
         e.preventDefault();
         navigator.app.exitApp();
     } else {
