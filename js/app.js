@@ -10,15 +10,25 @@ function onDeviceReady() {
 }
 
 function onBackKeyDown(e) {
-    // Handle the back button
-    // e.preventDefault();
+    
     var bodyid = $("body").attr("id");
     if(bodyid == 'index' || bodyid == 'login'){
         e.preventDefault();
-        navigator.app.exitApp();
+        navigator.notification.confirm(
+            "Do you want to close the app?",
+            function (button) {
+              if (button==2) {
+                navigator.app.exitApp();
+              }
+            }
+            ,
+            "EXIT",
+            ["Cancel","OK"]
+        );
     } else {
         navigator.app.backHistory()
     }
+
     // navigator.app.exitApp();
     // navigator.app.backHistory();
 }
