@@ -12,7 +12,7 @@ function onDeviceReady() {
 function onBackKeyDown(e) {
     // Handle the back button
     // e.preventDefault();
-    if(window.location.hash=='#home'){
+    if(window.location.hash=='#home' || window.location.hash=='#login'){
         e.preventDefault();
         navigator.app.exitApp();
     } else {
