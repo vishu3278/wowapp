@@ -52,7 +52,7 @@ function onOnline() {
     var networkState = navigator.connection.type;
 
     if (networkState !== Connection.NONE) {
-        alert("You are not connected to internet.")
+        alert("You are now connected to internet.")
     }
     // display('Connection type: ' + networkState);
 }
@@ -60,6 +60,6 @@ function onOnline() {
 function onOffline() {
     // Handle the offline event
     // console.log("lost connection");
-    alert("You lost internet connection.")
+    alert("You lost internet connection. Please connect to proceed.")
 }
 
