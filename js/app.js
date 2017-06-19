@@ -12,7 +12,7 @@ function onDeviceReady() {
 function onBackKeyDown(e) {
     
     var bodyid = $("body").attr("id");
-    if(bodyid == 'index' || bodyid == 'login'){
+    if(bodyid == 'index' || bodyid == 'login' || bodyid == 'home'){
         e.preventDefault();
         navigator.notification.confirm(
             "Do you want to close the app?",
