@@ -33,7 +33,7 @@
             $(this).before(itemform);
         });
         if (sessionStorage.getItem('sales_person_id')) {
-            console.log(sessionStorage.getItem('email'));
+            // console.log(sessionStorage.getItem('email'));
         } else{
             window.location.assign('login.html');
         };
@@ -49,7 +49,7 @@
     </script>
 </head>
 
-<body onload="deviceReady();" id="order">
+<body >
     <nav>
         <div class="nav-wrapper pink darken-4">
             <a href="#!" class="brand-logo center">Order Note</a>
@@ -178,7 +178,7 @@
         var storesObj; //all stores data as array of objects;
 
         $.ajax({
-            url: 'http://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/store_list.php',
+            url: 'https://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/store_list.php',
             type: 'POST',
             crossDomain: true,
             // data: JSON.stringify(sData),
@@ -231,20 +231,11 @@
             };
         });
         
-        // method to check if store is selected 
-        /*function checkStore () {
-            if(sessionStorage.getItem('currStore')){
-                return sessionStorage.getItem('currStore');
-            }else{
-                alert("Please select store !");
-                return '';
-            };
-        }*/
 
         var catList; //category list object
 
         $.ajax({
-            url:'http://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/category_list.php',
+            url:'https://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/category_list.php',
             type: 'POST',
             crossDomain: true,
             data: '',
@@ -288,7 +279,7 @@
             // $("#avQty").val('').siblings('label').removeClass('active');
 
             $.ajax({
-                url: 'http://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/product_list.php',
+                url: 'https://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/product_list.php',
                 type: 'POST',
                 crossDomain: true,
                 data: JSON.stringify(catData),
@@ -349,7 +340,7 @@
             for (var i = orderItems.length - 1; i >= 0; i--) {
                 grandtotal += Number(orderItems[i].subtotal);
             };
-            console.log("grandTotal = "+grandtotal);
+            // console.log("grandTotal = "+grandtotal);
             sessionStorage.setItem('gTotal',grandtotal);
             return grandtotal;
         }
@@ -429,7 +420,7 @@
             $('#addItem').modal('close');
 
             $("#newitems").html(cartitem.join(''));
-            console.info(orderItems);
+            // console.info(orderItems);
             var grandPrice = grandTotal();
 
         });
@@ -460,7 +451,7 @@
             };
             console.info(orderData);
             $.ajax({
-                url:'http://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/order.php',
+                url:'https://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/order.php',
                 type: 'POST',
                 crossDomain: true,
                 data: JSON.stringify(orderData),

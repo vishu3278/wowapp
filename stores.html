@@ -14,7 +14,7 @@
     <script type="text/javascript">
     $(document).ready(function() {
         if (sessionStorage.getItem('sales_person_id')) {
-            console.log(sessionStorage.getItem('email'));
+            // console.log(sessionStorage.getItem('email'));
         } else{
             window.location.assign('login.html');
         };
@@ -53,7 +53,7 @@
             "sales_person_id": sessionStorage.getItem('sales_person_id')
         };
         $.ajax({
-            url: 'http://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/store_list.php',
+            url: 'https://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/store_list.php',
             type: 'POST',
             crossDomain: true,
             // data: JSON.stringify(data),

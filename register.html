@@ -24,7 +24,7 @@
         });*/
         $('.modal').modal();
         if (sessionStorage.getItem('sales_person_id')) {
-            console.log(sessionStorage.getItem('email'));
+            // console.log(sessionStorage.getItem('email'));
         } else{
             window.location.assign('login.html');
         };
@@ -33,7 +33,7 @@
     </script>
 </head>
 
-<body onload="deviceReady();" id="register">
+<body >
     <nav>
         <div class="nav-wrapper pink darken-4">
             <a href="#!" class="brand-logo center">Register Store</a>
@@ -174,7 +174,7 @@
 
         // ajax to fetch countries
         $.ajax({
-            url: 'http://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/country_list.php',
+            url: 'https://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/country_list.php',
             type: 'POST',
             crossDomain: true,
             // data: JSON.stringify(data),
@@ -202,7 +202,7 @@
 
         // ajax to fetch state/province
         $.ajax({
-            url: 'http://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/provience.php',
+            url: 'https://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/provience.php',
             type: 'POST',
             crossDomain: true,
             // data: JSON.stringify(data),
@@ -230,7 +230,7 @@
 
         // ajax to fetch cities
         $.ajax({
-            url: 'http://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/cities.php',
+            url: 'https://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/cities.php',
             type: 'POST',
             crossDomain: true,
             // data: JSON.stringify(data),
@@ -325,7 +325,7 @@
                 $(".progress, .overlay").removeClass("hide");
 
                 $.ajax({
-                    url: 'http://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/storeadd.php',
+                    url: 'https://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/storeadd.php',
                     type: 'POST',
                     crossDomain: true,
                     data: JSON.stringify(data),
