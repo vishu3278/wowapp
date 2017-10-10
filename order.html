@@ -108,7 +108,7 @@
             
         </div>
         <div class="modal-footer">
-            <a href="#!" class="modal-action modal-close waves-effect btn btn-block pink darken-4">OK</a>
+            <a href="#!" class="modal-action modal-close waves-effect btn btn-block red darken-4">OK</a>
         </div>
     </div>
     
@@ -178,7 +178,7 @@
         var storesObj; //all stores data as array of objects;
 
         $.ajax({
-            url: 'https://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/store_list.php',
+            url: 'https://wowitsolutions.com/wowMobile/wowstoreadmin/apis/store_list.php',
             type: 'POST',
             crossDomain: true,
             // data: JSON.stringify(sData),
@@ -235,7 +235,7 @@
         var catList; //category list object
 
         $.ajax({
-            url:'https://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/category_list.php',
+            url:'https://wowitsolutions.com/wowMobile/wowstoreadmin/apis/category_list.php',
             type: 'POST',
             crossDomain: true,
             data: '',
@@ -279,7 +279,7 @@
             // $("#avQty").val('').siblings('label').removeClass('active');
 
             $.ajax({
-                url: 'https://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/product_list.php',
+                url: 'https://wowitsolutions.com/wowMobile/wowstoreadmin/apis/product_list.php',
                 type: 'POST',
                 crossDomain: true,
                 data: JSON.stringify(catData),
@@ -451,7 +451,7 @@
             };
             console.info(orderData);
             $.ajax({
-                url:'https://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/order.php',
+                url:'https://wowitsolutions.com/wowMobile/wowstoreadmin/apis/order.php',
                 type: 'POST',
                 crossDomain: true,
                 data: JSON.stringify(orderData),
