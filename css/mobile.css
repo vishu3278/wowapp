@@ -1,7 +1,8 @@
 /*@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');*/
-/*@import url('https://fonts.googleapis.com/css?family=Architects+Daughter');*/
-@import url('https://fonts.googleapis.com/css?family=Rancho');
-.rancho {font-family: 'Rancho', cursive;}
+/*@import url('https://fonts.googleapis.com/css?family=Rancho');*/
+@import url('https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700');
+/*.rancho {font-family: 'Rancho', cursive;}*/
+.quicksand { font-family: 'Quicksand', sans-serif;}
 body, html { font-size: 16px;}
 body .roboto,
 .content,
@@ -63,7 +64,7 @@ body {
     /*color: #fff;*/
     /*background-color: #999999;*/
     border-radius: 0;
-    font-family: 'Rancho', cursive;
+	font-family: 'Quicksand', sans-serif;
 }
 
 .content .btn-primary {
@@ -96,7 +97,7 @@ body {
 
 .pink.darken-4 {
     /*font-family: 'Architects Daughter', cursive;*/
-    font-family: 'Rancho', cursive;
+    font-family: 'Quicksand', sans-serif;
 }
 
 .order textarea.materialize-textarea {
@@ -172,7 +173,7 @@ input.error { border-bottom-color: #c00;}
 
 .card .collection { margin-left: -13px; margin-right: -13px; margin-bottom: 0;}
 .card .collection .collection-item { padding-top: 6px; padding-right: 12px; padding-bottom: 6px; }
-.card .card-title, .order-history .title { font-family: 'Rancho', cursive; margin-top: 0; margin-bottom: 5px;}
+.card .card-title, .order-history .title { font-family: 'Quicksand', sans-serif; margin-top: 0; margin-bottom: 5px;}
 .card .card-content { min-height: 150px;}
 .card .card-content,
 .card .card-action,
