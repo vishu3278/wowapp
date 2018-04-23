@@ -51,7 +51,7 @@ body {
 }
 
 .content {
-    background: none; position: relative; min-height: 400px; min-height: 75vh;
+    background: none; position: relative; min-height: 400px; min-height: 85vh;
 }
 .btn {
     font-size: 20px;
@@ -79,7 +79,6 @@ body {
 }
 
 .form-background {
-    background: url("../images/input-back.png");
     padding: 10px 5px 15px;
     margin-bottom: 15px;
 }
