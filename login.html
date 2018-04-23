@@ -73,7 +73,7 @@
                 // console.info(data);
                 $(".progress, .overlay").removeClass("hide");
                 $.ajax({
-                    url: 'https://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/login.php',
+                    url: 'https://wowitsolutions.com/wowMobile/wowstoreadmin/apis/login.php',
                     type:'POST',
                     crossDomain:true,
                     data: JSON.stringify(data),
@@ -102,7 +102,7 @@
                             $(".chip").removeClass("hide").html(result.error);
                         }
                     },
-                    error:function() {alert("Some error occured !")}
+                    error:function(error) {alert(error)}
                 });
             }
             
