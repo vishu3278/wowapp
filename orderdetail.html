@@ -23,17 +23,19 @@
 </head>
 
 <body>
-    <nav>
-        <div class="nav-wrapper red darken-2">
-            <a href="#!" class="brand-logo center">Order Detail</a>
-            <ul id="nav-mobile" class="left">
-                <li><a href="orderhistory.html"><i class="mdi-arrow_back "></i></a></li>
-            </ul>
-            <!-- <ul class="right">
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper red darken-2">
+                <a href="#!" class="brand-logo center">Order Detail</a>
+                <ul id="nav-mobile" class="left">
+                    <li><a href="orderhistory.html"><i class="mdi-arrow_back "></i></a></li>
+                </ul>
+                <!-- <ul class="right">
                 <li><a href="register.html"><i class="mdi-playlist_add "></i></a></li>
             </ul> -->
-        </div>
-    </nav>
+            </div>
+        </nav>
+    </div>
     <div class="content container ">
         <div class="progress hide">
             <div class="indeterminate"></div>
@@ -41,7 +43,6 @@
         <div class="chip red lighten-2 hide" style="width:100%;">Invalid data !</div>
         <div class="overlay hide"></div>
         <div id="storelist">
-            
         </div>
     </div>
     <script type="text/javascript">
@@ -53,7 +54,7 @@
             "order_id": sessionStorage.getItem('order_id')
         };
         $.ajax({
-            url: 'https://wowitsolutions.com/mmsMobile/mmsstoreadmin/apis/order_details.php',
+            url: 'https://wowitsolutions.com/wowMobile/wowstoreadmin/apis/order_details.php',
             type: 'POST',
             crossDomain: true,
             data: JSON.stringify(data),
@@ -64,20 +65,20 @@
                     // console.log(result.data);
                     var stotal = ("<h5 class='center-align'>" + sessionStorage.getItem('order_id') + "</h5>");
                     var stores = $("<div class='order-history'/>");
-                    
+
                     var clss = (sdata[0].status == "complete") ? "green" : "red";
                     var clsp = (sdata[0].payment_status == "paid") ? "green" : "red";
-                    stores.append('<table class="bordered"><tbody><tr><td colspan="2"><label>StoreName</label><br><h5 class="title pink-text">'+sdata[0].store_name+'</h5></td></tr><tr><td colspan="2"><label>Address</label><br>'+sdata[0].address+'</td></tr><tr><td colspan="2"><label>Order Date</label><br>' + sdata[0].order_date + '</td></tr><tr><td colspan="2"><label>Salesperson</label><br>' + sdata[0].sales_person_name + '</td></tr><tr><td><label>Total QTY</label><br>' + sdata[0].total_qty + '</td><td><label>Grand Total</label><br>' + sdata[0].grand_price + '</td></tr><tr><td><label>Payment Status</label><br><span class="tag ' + clsp + '">' + sdata[0].payment_status + '</span></td><td><label>Order Status</label><br><span class="tag ' + clss + '">' + sdata[0].status + '</span></td></tr></tbody></table>');
+                    stores.append('<table class="bordered"><tbody><tr><td colspan="2"><label>StoreName</label><br><h5 class="title pink-text">' + sdata[0].store_name + '</h5></td></tr><tr><td colspan="2"><label>Address</label><br>' + sdata[0].address + '</td></tr><tr><td colspan="2"><label>Order Date</label><br>' + sdata[0].order_date + '</td></tr><tr><td colspan="2"><label>Salesperson</label><br>' + sdata[0].sales_person_name + '</td></tr><tr><td><label>Total QTY</label><br>' + sdata[0].total_qty + '</td><td><label>Grand Total</label><br>' + sdata[0].grand_price + '</td></tr><tr><td><label>Payment Status</label><br><span class="tag ' + clsp + '">' + sdata[0].payment_status + '</span></td><td><label>Order Status</label><br><span class="tag ' + clss + '">' + sdata[0].status + '</span></td></tr></tbody></table>');
                     // sdata[0].store_name;
                     for (var i = 1; i < sdata.length; i++) {
                         // sdata[i];
                         var pimg;
                         if (sdata[i].product_image) {
-                            pimg = 'http://wowitsolutions.com/mmsMobile/images/test_pic/'+sdata[i].product_image;
-                        } else{
+                            pimg = 'https://wowitsolutions.com/wowMobile/images/test_pic/' + sdata[i].product_image;
+                        } else {
                             pimg = 'images/logo.png';
                         };
-                        stores.append('<ul class="collection"><li class="collection-item row"><div class="col s4"><img src="'+pimg+'" class="responsive-img" alt="img"></div><div class="col s8"><h6>'+sdata[i].product_name+'</h6><p>'+sdata[i].product_categeory+'</p>'+sdata[i].product_model_no+'<br>'+sdata[i].product_code+'</div></li><li class="collection-item row"><div class="col s4"><label>Price</label><br>'+sdata[i].product_price+'</div><div class="col s4"><label>Qty</label><br>'+sdata[i].product_qty+'</div><div class="col s4"><label>Subtotal</label><br>'+sdata[i].subtotal+'</div></li></ul>');
+                        stores.append('<ul class="collection"><li class="collection-item row"><div class="col s4"><img src="' + pimg + '" class="responsive-img" alt="img"></div><div class="col s8"><h6>' + sdata[i].product_name + '</h6><p>' + sdata[i].product_categeory + '</p>' + sdata[i].product_model_no + '<br>' + sdata[i].product_code + '</div></li><li class="collection-item row"><div class="col s4"><label>Price</label><br>' + sdata[i].product_price + '</div><div class="col s4"><label>Qty</label><br>' + sdata[i].product_qty + '</div><div class="col s4"><label>Subtotal</label><br>' + sdata[i].subtotal + '</div></li></ul>');
                     };
 
                     // window.location.assign("home.html");
@@ -91,6 +92,7 @@
             },
             error: function() {
                 alert("Some error occured !")
+                $(".progress, .overlay").addClass("hide");
             }
         });
     })
