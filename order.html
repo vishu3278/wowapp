@@ -20,21 +20,21 @@
         $('#orderDate').pignoseCalendar({
             format: 'DD-MM-YYYY',
             minDate: currdate,
-            buttons:true,
-            date:moment()
+            buttons: true,
+            date: moment()
         });
         // console.log(currdate);
         // $('select').material_select();
 
         $('.modal').modal();
 
-        $("#addMoreItem").on('click',function() {
+        $("#addMoreItem").on('click', function() {
             var itemform = $(this).prev('fieldset').clone(true);
             $(this).before(itemform);
         });
         if (sessionStorage.getItem('sales_person_id')) {
             // console.log(sessionStorage.getItem('email'));
-        } else{
+        } else {
             window.location.assign('login.html');
         };
 
@@ -44,27 +44,28 @@
                 location.reload();
             } // Callback for Modal close
         });
-          
+
     });
     </script>
 </head>
 
-<body >
-    <nav>
-        <div class="nav-wrapper red darken-2">
-            <a href="#!" class="brand-logo center">Order Note</a>
-            <ul id="nav-mobile" class="left">
-                <li><a href="home.html"><i class="mdi-arrow_back "></i></a></li>
-            </ul>
-        </div>
-    </nav>
+<body>
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper red darken-2">
+                <a href="#!" class="brand-logo center">Order Note</a>
+                <ul id="nav-mobile" class="left">
+                    <li><a href="home.html"><i class="mdi-arrow_back "></i></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
     <div class="content container order">
         <div class="progress hide">
             <div class="indeterminate"></div>
         </div>
         <div class="chip red lighten-3 hide" style="width:100%;">Invalid data !</div>
         <div class="overlay hide"></div>
-
         <div class="form-background">
             <fieldset>
                 <legend>Select Store </legend>
@@ -78,40 +79,36 @@
                 </div>
             </fieldset>
             <ul class="collection hide" id="storeDetail">
-              <li class="collection-item"><span class="title">Name</span><p>Store Name</p></li>
-              <li class="collection-item">Alvin</li>
-              <li class="collection-item">Alvin</li>
-              <li class="collection-item">Alvin</li>
+                <li class="collection-item"><span class="title">Name</span>
+                    <p>Store Name</p>
+                </li>
+                <li class="collection-item">Alvin</li>
+                <li class="collection-item">Alvin</li>
+                <li class="collection-item">Alvin</li>
             </ul>
         </div>
-
         <form id="itemsForm" class="input-group hide">
             <div class="form-background">
-                
                 <div id="newitems">
-                    
                 </div>
-                <p class="center-align">Add Item<br><a href="#addItem" class="btn-floating btn-large green waves-effect"><i class="mdi-add"></i> Add Item</a></p>
+                <p class="center-align">Add Item
+                    <br><a href="#addItem" class="btn-floating btn-large green waves-effect"><i class="mdi-add"></i> Add Item</a></p>
             </div>
             <div class="footer-button">
                 <div class="input-field">
-                    <button type="button" id="orderNow" class="btn btn-large btn-block waves-effect red darken-4" >Order Now</button>
+                    <button type="button" id="orderNow" class="btn btn-large btn-block waves-effect red darken-4">Order Now</button>
                 </div>
-                <div class="input-field"><a href="home.html" class="btn btn-large btn-block waves-effect green" >Back</a></div>
+                <div class="input-field"><a href="home.html" class="btn btn-large btn-block waves-effect green">Back</a></div>
             </div>
         </form>
-
     </div>
-
     <div id="modal1" class="modal">
         <div class="modal-content">
-            
         </div>
         <div class="modal-footer">
             <a href="#!" class="modal-action modal-close waves-effect btn btn-block red darken-4">OK</a>
         </div>
     </div>
-    
     <div id="addItem" class="modal modal-fixed-footer ">
         <div class="modal-content">
             <div class="progress hide">
@@ -135,13 +132,12 @@
                         <input type="text" name="avQty" id="avQty" placeholder="Availabel Qty" readonly>
                         <label class="active">Available Qty</label>
                     </div>
-                    
                 </div>
                 <div class="col s6">
                     <div class="input-field">
-                <input type="number" name="itemPrice" id="itemPrice" min="0">
-                <label>Price</label>
-            </div>
+                        <input type="number" name="itemPrice" id="itemPrice" min="0">
+                        <label>Price</label>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -158,14 +154,11 @@
                     </div>
                 </div>
             </div>
-            
-            
         </div>
         <div class="modal-footer">
             <button type="button" id="addCart" class="modal-action waves-effect btn red darken-4">OK</button> <a href="#!" class="modal-action modal-close waves-effect btn green">Cancel</a>
         </div>
     </div>
-
     <script type="text/javascript">
     jQuery(function($) {
         // $(".progress").addClass("hide");
@@ -191,9 +184,9 @@
                     var stores = ['<option value="0">Select Store</option>'];
                     for (var i = sdata.length - 1; i >= 0; i--) {
                         // sdata[i];
-                        stores.push("<option value='"+sdata[i].store_id+"'>"+sdata[i].store_name+"</option>");
+                        stores.push("<option value='" + sdata[i].store_id + "'>" + sdata[i].store_name + "</option>");
                     };
-                    
+
                     // console.info(storesObj);
                     // window.location.assign("home.html");
                     $("#storeList").html(stores.join(''));
@@ -208,38 +201,38 @@
                 alert("Some error occured !")
             }
         });
-        
+
         var currStore = []; //stores registered by salesperson
         $("#storeList").on('change', function() {
             var storeId = $(this).val();
             currStore = [];
-            sessionStorage.setItem('store_id',storeId);
+            sessionStorage.setItem('store_id', storeId);
             for (var i = 0; i < storesObj.length; i++) {
                 // console.log(storesObj[i].store_id);
                 if (storesObj[i].store_id == storeId) {
-                    currStore.push("<li class='collection-item'><span class='title grey-text'>Store Name</span><br><strong>"+storesObj[i].store_name+"</strong></li>");
-                    currStore.push("<li class='collection-item'><span class='title grey-text'>Contact Details</span><br><i class='mdi-person_outline grey-text'></i> <strong>"+storesObj[i].cont_person+"</strong><br><i class='mdi-phone grey-text'></i> <strong>"+storesObj[i].store_phoneno+"</strong><br><i class='mdi-mail_outline grey-text'></i> <strong>"+storesObj[i].store_email+"</strong></li>");
-                    currStore.push("<li class='collection-item'><span class='title grey-text'>Address</span><br><strong>"+storesObj[i].store_address+", "+storesObj[i].store_city+", "+storesObj[i].store_state+", "+storesObj[i].store_country+"</strong></li>");
-                    
+                    currStore.push("<li class='collection-item'><span class='title grey-text'>Store Name</span><br><strong>" + storesObj[i].store_name + "</strong></li>");
+                    currStore.push("<li class='collection-item'><span class='title grey-text'>Contact Details</span><br><i class='mdi-person_outline grey-text'></i> <strong>" + storesObj[i].cont_person + "</strong><br><i class='mdi-phone grey-text'></i> <strong>" + storesObj[i].store_phoneno + "</strong><br><i class='mdi-mail_outline grey-text'></i> <strong>" + storesObj[i].store_email + "</strong></li>");
+                    currStore.push("<li class='collection-item'><span class='title grey-text'>Address</span><br><strong>" + storesObj[i].store_address + ", " + storesObj[i].store_city + ", " + storesObj[i].store_state + ", " + storesObj[i].store_country + "</strong></li>");
+
                     $("#storeDetail").html(currStore).removeClass("hide");
                     $("#itemsForm").removeClass("hide");
                 }
-                if(storeId == 0 || storeId == undefined){
+                if (storeId == 0 || storeId == undefined) {
                     $("#storeDetail").html("").addClass("hide");
                     $("#itemsForm").addClass("hide");
                 }
             };
         });
-        
+
 
         var catList; //category list object
 
         $.ajax({
-            url:'https://wowitsolutions.com/wowMobile/wowstoreadmin/apis/category_list.php',
+            url: 'https://wowitsolutions.com/wowMobile/wowstoreadmin/apis/category_list.php',
             type: 'POST',
             crossDomain: true,
             data: '',
-            success:function(result) {
+            success: function(result) {
                 var cdata = result.data;
                 // console.info(cdata);
                 catList = result.data;
@@ -247,30 +240,30 @@
 
                 if (result.status == 1) {
                     for (var i = cdata.length - 1; i >= 0; i--) {
-                        categlist.push("<option value='"+cdata[i].category_id+"'>"+cdata[i].category_name+"</option>");
+                        categlist.push("<option value='" + cdata[i].category_id + "'>" + cdata[i].category_name + "</option>");
                     };
                     // console.info(JSON.stringify(categlist));
                     $("#prodCat").html(categlist.join(''));
                     // $('select').material_select();
-                } else{
+                } else {
                     $(".chip").removeClass("hide").html(result.error);
                 };
-                
+
             },
-            error:function() {
+            error: function() {
                 alert("Some error occured in category list API!");
             }
         });
 
         var prodList; //list of products filtered by category selection
-        
-        $("#prodCat").on('change',function() {
+
+        $("#prodCat").on('change', function() {
             var curCat = $(this).val();
             var catData = {
                 "categeory_id": curCat
             };
 
-            sessionStorage.setItem('catId',curCat);
+            sessionStorage.setItem('catId', curCat);
 
             $(".progress").removeClass("hide");
             // $(".chip").addClass("hide").html("");
@@ -292,9 +285,9 @@
                         // var stotal = ("<h5 class='center-align'>"+result.total+" stores found</h5>");
                         var prodArray = ['<option value="0">Select Item</option>'];
                         for (var i = prod.length - 1; i >= 0; i--) {
-                            prodArray.push('<option value="'+prod[i].product_id+'" '+prod[i].status+'>'+prod[i].item_name+' ('+prod[i].item_model_no+')'+'</option>');
+                            prodArray.push('<option value="' + prod[i].product_id + '" ' + prod[i].status + '>' + prod[i].item_name + ' (' + prod[i].item_model_no + ')' + '</option>');
                         };
-                        
+
                         // window.location.assign("home.html");
                         $("#itemList").html(prodArray.join(''));
                         $(".progress").addClass("hide");
@@ -313,48 +306,48 @@
                 }
             });
         });
-        
 
-        $("#itemList").on('change',function() {
+
+        $("#itemList").on('change', function() {
             var pid = $(this).val();
-            sessionStorage.setItem('product_id',pid);
+            sessionStorage.setItem('product_id', pid);
             for (var i = prodList.length - 1; i >= 0; i--) {
                 if (prodList[i].product_id == pid) {
                     $("#itemPrice").val(prodList[i].item_cost).siblings('label').addClass('active');
                     $("#avQty").val(prodList[i].item_available_qty).siblings('label').addClass('active');
                 }
             };
-            
+
             if (pid == 0 || pid == undefined || pid == null) {
                 $("#itemPrice, #avQty").val('').siblings('label').removeClass('active');
                 // $("#avQty").val('').siblings('label').removeClass('active');
             };
         });
-        
+
 
         // calculate subtotal and update in array
         var orderItems = [];
-        
-        function grandTotal () {
+
+        function grandTotal() {
             var grandtotal = 0;
             for (var i = orderItems.length - 1; i >= 0; i--) {
                 grandtotal += Number(orderItems[i].subtotal);
             };
             // console.log("grandTotal = "+grandtotal);
-            sessionStorage.setItem('gTotal',grandtotal);
+            sessionStorage.setItem('gTotal', grandtotal);
             return grandtotal;
         }
 
-        function total_Qty () {
+        function total_Qty() {
             var totalqty = 0;
             for (var i = orderItems.length - 1; i >= 0; i--) {
                 totalqty += Number(orderItems[i].product_qty);
             };
-            console.log("totalQty = "+totalqty);
+            console.log("totalQty = " + totalqty);
             return totalqty;
         }
 
-        function calcSubtotal () {
+        function calcSubtotal() {
             var prodQty = $("#itemQty").val();
             var prodPrice = $("#itemPrice").val();
             var subTotal = (prodQty * prodPrice).toFixed(2);
@@ -362,17 +355,17 @@
             return subTotal;
         }
 
-        $("#itemQty").on('blur',function() {
+        $("#itemQty").on('blur', function() {
             calcSubtotal();
         });
 
-        $("#addCart").on('click',function() {
+        $("#addCart").on('click', function() {
             var prodId = Number(sessionStorage.getItem('product_id'));
             // var catId = sessionStorage.getItem('catId');
             var prodQty = $("#itemQty").val();
             var prodPrice = $("#itemPrice").val();
             var subTotal = calcSubtotal();
-            
+
             // var totalQty = total_Qty();
             // var grandPrice = grandTotal();
 
@@ -394,9 +387,9 @@
                 };
             };
 
-            
+
             itemObj.product_id = prodId;
-            
+
             itemObj.categeory_id = sessionStorage.getItem('catId');
             itemObj.product_qty = prodQty;
             itemObj.product_price = prodPrice;
@@ -409,7 +402,7 @@
             // console.info(orderItems);
             var cartitem = [];
             for (var i = 0; i < orderItems.length; i++) {
-                cartitem.push('<ul id="'+orderItems[i].product_id+'" class="collection with-header"><li class="collection-header"><a class="btn-floating small close red lighten-2 right waves-effect"><i class="mdi-close"></i></a><h5 class="pink-text text-darken-2">'+orderItems[i].item_name+'</h5><h6 class="title">'+orderItems[i].category_name+'</h6></li><li class="collection-item row"><div class="col s6"><label>Model No.</label><br>'+orderItems[i].item_model_no+'</div><div class="col s6"><label>Item Code</label><br>'+orderItems[i].item_code+'</div></li><li class="collection-item row"><div class="col s4"><label>Price</label><br>'+orderItems[i].product_price+'</div><div class="col s4"><label>Qty</label><br>'+orderItems[i].product_qty+'</div><div class="col s4"><label>Subtotal</label><br>'+orderItems[i].subtotal+'</div></li></ul>');
+                cartitem.push('<ul id="' + orderItems[i].product_id + '" class="collection with-header"><li class="collection-header"><a class="btn-floating small close red lighten-2 right waves-effect"><i class="mdi-close"></i></a><h5 class="pink-text text-darken-2">' + orderItems[i].item_name + '</h5><h6 class="title">' + orderItems[i].category_name + '</h6></li><li class="collection-item row"><div class="col s6"><label>Model No.</label><br>' + orderItems[i].item_model_no + '</div><div class="col s6"><label>Item Code</label><br>' + orderItems[i].item_code + '</div></li><li class="collection-item row"><div class="col s4"><label>Price</label><br>' + orderItems[i].product_price + '</div><div class="col s4"><label>Qty</label><br>' + orderItems[i].product_qty + '</div><div class="col s4"><label>Subtotal</label><br>' + orderItems[i].subtotal + '</div></li></ul>');
                 /*orderItems[i].product_id;
                 orderItems[i].categeory_id;
                 orderItems[i].product_price;
@@ -425,20 +418,20 @@
 
         });
 
-        $("#newitems").on('click','a.close',function() {
+        $("#newitems").on('click', 'a.close', function() {
             var item = $(this).closest('.collection');
             item.remove();
             item.attr('id');
             for (var i = orderItems.length - 1; i >= 0; i--) {
-                if(orderItems[i].product_id == item.attr('id')){
-                    orderItems.splice([i],1);
+                if (orderItems[i].product_id == item.attr('id')) {
+                    orderItems.splice([i], 1);
                 }
             };
             console.info(orderItems);
         });
 
-        $("#orderNow").on('click',function() {
-            
+        $("#orderNow").on('click', function() {
+
             $(".progress, .overlay").removeClass("hide");
             $(".chip").addClass("hide").html("");
 
@@ -451,17 +444,17 @@
             };
             console.info(orderData);
             $.ajax({
-                url:'https://wowitsolutions.com/wowMobile/wowstoreadmin/apis/order.php',
+                url: 'https://wowitsolutions.com/wowMobile/wowstoreadmin/apis/order.php',
                 type: 'POST',
                 crossDomain: true,
                 data: JSON.stringify(orderData),
-                success:function(result) {
+                success: function(result) {
                     if (result.status == 1) {
-                        $("#modal1 .modal-content").html("<p>"+result.data+"</p>");
+                        $("#modal1 .modal-content").html("<p>" + result.data + "</p>");
                         $('#modal1').modal('open');
                         $(".progress, .overlay").addClass("hide");
                         $(".chip").addClass("hide").html('');
-                    } else{
+                    } else {
                         $(".progress, .overlay").addClass("hide");
                         $(".chip").removeClass("hide").html(result.error);
                     };
@@ -472,9 +465,9 @@
                     $(".chip").addClass("hide").html('');
                 }
             })
-            
+
         });
-        
+
     })
     </script>
 </body>
