@@ -2,7 +2,7 @@
 <widget id="com.wowapp.demo" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>WOW Store App</name>
     <description>
-        Mobile app for taking order from stores and register new store(s).
+        Mobile app for taking order for store(s) and register new store.
     </description>
     <author email="vishu3278@gmail.com" href="http://wowitsolutions.com">
         WOW Team
