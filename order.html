@@ -171,7 +171,7 @@
         var storesObj; //all stores data as array of objects;
 
         $.ajax({
-            url: 'https://wowitsolutions.com/wowMobile/wowstoreadmin/apis/store_list.php',
+            url: 'http://wowitprojects.com/wowMobile/wowstoreadmin/apis/store_list.php',
             type: 'POST',
             crossDomain: true,
             // data: JSON.stringify(sData),
@@ -228,7 +228,7 @@
         var catList; //category list object
 
         $.ajax({
-            url: 'https://wowitsolutions.com/wowMobile/wowstoreadmin/apis/category_list.php',
+            url: 'http://wowitprojects.com/wowMobile/wowstoreadmin/apis/category_list.php',
             type: 'POST',
             crossDomain: true,
             data: '',
@@ -272,7 +272,7 @@
             // $("#avQty").val('').siblings('label').removeClass('active');
 
             $.ajax({
-                url: 'https://wowitsolutions.com/wowMobile/wowstoreadmin/apis/product_list.php',
+                url: 'http://wowitprojects.com/wowMobile/wowstoreadmin/apis/product_list.php',
                 type: 'POST',
                 crossDomain: true,
                 data: JSON.stringify(catData),
@@ -444,7 +444,7 @@
             };
             console.info(orderData);
             $.ajax({
-                url: 'https://wowitsolutions.com/wowMobile/wowstoreadmin/apis/order.php',
+                url: 'http://wowitprojects.com/wowMobile/wowstoreadmin/apis/order.php',
                 type: 'POST',
                 crossDomain: true,
                 data: JSON.stringify(orderData),

@@ -54,7 +54,7 @@
             "order_id": sessionStorage.getItem('order_id')
         };
         $.ajax({
-            url: 'https://wowitsolutions.com/wowMobile/wowstoreadmin/apis/order_details.php',
+            url: 'http://wowitprojects.com/wowMobile/wowstoreadmin/apis/order_details.php',
             type: 'POST',
             crossDomain: true,
             data: JSON.stringify(data),
@@ -74,7 +74,7 @@
                         // sdata[i];
                         var pimg;
                         if (sdata[i].product_image) {
-                            pimg = 'https://wowitsolutions.com/wowMobile/images/test_pic/' + sdata[i].product_image;
+                            pimg = 'http://wowitprojects.com/wowMobile/images/test_pic/' + sdata[i].product_image;
                         } else {
                             pimg = 'images/logo.png';
                         };

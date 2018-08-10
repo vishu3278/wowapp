@@ -55,7 +55,7 @@
             "sales_person_id": sessionStorage.getItem('sales_person_id')
         };
         $.ajax({
-            url: 'https://wowitsolutions.com/wowMobile/wowstoreadmin/apis/order_history.php',
+            url: 'http://wowitprojects.com/wowMobile/wowstoreadmin/apis/order_history.php',
             type: 'POST',
             crossDomain: true,
             data: JSON.stringify(data),
@@ -82,8 +82,8 @@
                     $(".chip").removeClass("hide").html(result.error);
                 }
             },
-            error: function() {
-                alert("Some error occured !")
+            error: function(error) {
+                alert(error);
             }
         });
 
