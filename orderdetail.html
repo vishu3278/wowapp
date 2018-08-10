@@ -63,7 +63,7 @@
                     // alert(result.data[0].first_name);
                     var sdata = result.data;
                     // console.log(result.data);
-                    var stotal = ("<h5 class='center-align'>" + sessionStorage.getItem('order_id') + "</h5>");
+                    var stotal = ("<h5 class='center-align'>#" + sessionStorage.getItem('order_id') + "</h5>");
                     var stores = $("<div class='order-history'/>");
 
                     var clss = (sdata[0].status == "complete") ? "green" : "red";
