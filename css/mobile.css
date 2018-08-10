@@ -1,6 +1,6 @@
-/*@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');*/
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
 /*@import url('https://fonts.googleapis.com/css?family=Rancho');*/
-@import url('https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700');
+/* @import url('https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700'); */
 /*.rancho {font-family: 'Rancho', cursive;}*/
 .quicksand { font-family: 'Quicksand', sans-serif;}
 body, html { font-size: 16px;}
@@ -171,7 +171,7 @@ input.error { border-bottom-color: #c00;}
 
 .card .collection { margin-left: -13px; margin-right: -13px; margin-bottom: 0;}
 .card .collection .collection-item { padding-top: 6px; padding-right: 12px; padding-bottom: 6px; }
-.card .card-title, .order-history .title { font-family: 'Quicksand', sans-serif; margin-top: 0; margin-bottom: 5px;}
+.card .card-title, .order-history .title { margin-top: 0; margin-bottom: 5px;}
 .card .card-content { min-height: 150px;}
 .card .card-content,
 .card .card-action,
