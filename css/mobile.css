@@ -207,6 +207,7 @@ select.browser-default { color: #666; }
 
 #itemList .card { font-size: 14px; margin-left: -8px; margin-right: -8px; margin-bottom: 0.5em; }
 #itemList .card .card-image { height: 200px; background-position: center; background-size: cover; /* min-height: 35%; */ }
+#itemList .card .card-title { font-size: 16px; padding: 10px; }
 #itemList .card .card-action { padding: 0; }
 #itemList .card .collection-item { line-height: 1.2; }
 #itemList .card .collection-item .row { margin-bottom: 0; }
