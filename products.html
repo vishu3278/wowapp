@@ -102,11 +102,11 @@
                         <i class="mdi mdi-sort"></i>
                         <span>Sort</span>
                         <div class="input-field ">
-                            <select name="sort" id="sort" class="browser-default">
+                            <select name="sort" id="sort" class="browser-default" v-model="sort" v-on:change="prodList()">
                                 <option value="a-z">Name A-Z</option>
                                 <option value="z-a">Name Z-A</option>
-                                <option value="0-9">Price Low - High</option>
-                                <option value="9-0">Price High - Low</option>
+                                <option value="low-high">$ Low-High</option>
+                                <option value="high-low">$ High-Low</option>
                             </select>
                         </div>
                     </div>
@@ -205,7 +205,7 @@
             </div>
             <div class="modal-footer ">
                 <!-- <a href="#!" class="modal-close waves-effect waves-green btn-flat">OK</a> -->
-                <button class="btn btn-block waves-effect waves-light green" v-on:click="addToOrders()"><i class=" mdi-add_shopping_cart"></i> Add to Orders</button>
+                <button class="btn btn-large btn-block waves-effect waves-light green" v-on:click="addToOrders()"><i class=" mdi-add_shopping_cart"></i> Add to Orders</button>
             </div>
         </div>
         <ul id="slide-out" class="sidenav">
@@ -270,6 +270,7 @@
             filter: false,
             category: [],
             mycat: '',
+            sort:'',
             products: [],
             imgpath: 'http://wowitprojects.com/wowMobile/images/test_pic/',
             noimage: 'http://wowitprojects.com/wowMobile/wowapp/images/placeholder-400x300.jpg',
@@ -351,7 +352,7 @@
             },
             prodList: function() {
                 this.loader = true;
-                axios.post('http://wowitprojects.com/wowMobile/wowstoreadmin/apis/product_list.php', { "categeory_id": this.mycat })
+                axios.post('http://wowitprojects.com/wowMobile/wowstoreadmin/apis/product_list.php', { "categeory_id": this.mycat, "sort":this.sort })
                     .then((result) => {
                         // console.log(result);
                         this.products = result.data.data;
