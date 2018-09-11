@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>WOW Products Page</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons" > -->
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="css/material-icons.css">
+    <link rel="stylesheet" type="text/css" href="css/pignose.calendar.min.css">
+    <link rel="stylesheet" href="css/mobile.css">
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/moment.min.js"></script>
+    <script type="text/javascript" src="js/pignose.calendar.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        var currdate = new Date() - 86400000;
+        $('#orderDate').pignoseCalendar({
+            format: 'DD-MM-YYYY',
+            minDate: currdate,
+            buttons: true,
+            date: moment()
+        });
+        // console.log(currdate);
+        // $('select').material_select();
+        
+        $('.modal').modal();
+
+        if (sessionStorage.getItem('sales_person_id')) {
+            // console.log(sessionStorage.getItem('email'));
+        } else {
+            window.location.assign('login.html');
+        };
+
+    });
+    </script>
+</head>
+
+<body >
+    <div class="navbar-fixed" style="height: 110px;">
+        <nav class="nav-extended">
+            <div class="nav-wrapper red darken-2">
+                <a href="#!" class="brand-logo center">Products</a>
+                <ul id="nav-mobile" class="left">
+                    <li><a href="#" onclick="window.history.back()"><i class="mdi-arrow_back "></i></a></li>
+                </ul>
+                <ul class="right">
+                    <li><a href="#" data-target="slide-out" ><i class="mdi-shopping_basket"></i></a></li>
+                </ul>
+                <!-- <ul id="slide-out" class="sidenav">
+                    <li>
+                        <div class="user-view">
+                            <div class="background">
+                                <img src="images/office.jpg">
+                                <i class="mdi-playlist_add_check"></i>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="#!"><i class="mdi-cloud"></i>Item 1</a></li>
+                    <li>
+                        <div class="divider"></div>
+                    </li>
+                    <li><a class="subheader">Grand Total</a></li>
+                </ul> -->
+            </div>
+            <div class="nav-content" style="padding: 0 5px;">Category
+                <div class="input-field inline">
+                    <select class="browser-default" name="prodCat" id="prodCat">
+                        
+                    </select>
+                </div>
+                
+            </div>
+        </nav>
+        
+    </div>
+    <div id="products" class="content  order">
+        <div class="progress hide" >
+            <div class="indeterminate"></div>
+        </div>
+        <div class="chip red lighten-3 hide" style="width:100%;">Invalid data !</div>
+        <div class="overlay "></div>
+        
+        <div id="itemList" class="row">
+            <!-- <div class="col s6 m4"></div> -->
+        </div>
+        <!-- <form id="itemsForm" class="input-group hide">
+            <div class="form-background">
+                <div id="newitems">
+                </div>
+                <p class="center-align">Add Item
+                    <br><a href="#addItem" class="btn-floating btn-large green waves-effect"><i class="mdi-add"></i> Add Item</a></p>
+            </div>
+            <div class="footer-button">
+                <div class="input-field">
+                    <button type="button" id="orderNow" class="btn btn-large btn-block waves-effect red darken-4">Order Now</button>
+                </div>
+                <div class="input-field"><a href="home.html" class="btn btn-large btn-block waves-effect green">Back</a></div>
+            </div>
+        </form> -->
+    </div>
+    <!-- Modal Structure -->
+    <div id="cartModal" class="modal bottom-sheet">
+        <div class="modal-content amber lighten-5">
+            <h6>Review your selection</h6>
+            <form action="" id="cartForm" data-pid="" >
+                <div class="row" style="margin: 0;">
+                    <div class="col s4" style="padding-left: 0;">
+                        <div class="input-field" >
+                            <input type="text" name="itemPrice" id="itemPrice" readonly="" placeholder="Price" >
+                            <label for="itemPrice" class="active">Price</label>
+                        </div>
+                    </div>
+                    <div class="col s3" style="padding-left: 0;">
+                        <div class="input-field">
+                            <input type="number" name="itemQty" id="itemQty" value="1" min="1">
+                            <label for="itemQty" class="active">QTY</label>
+                        </div>
+                    </div>
+                    <div class="col s5" style="padding: 0;">
+                        <div class="input-field">
+                            <input type="text" name="itemSubtotal" id="itemSubtotal" readonly="" value="0">
+                            <label for="itemSubtotal" class="active">Subtotal</label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer amber lighten-4">
+            <!-- <a href="#!" class="modal-close waves-effect waves-green btn-flat">OK</a> -->
+            <button id="addCart" class="btn waves-effect waves-red red">Add to Orders</button>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/products.js"></script>
+    <script type="text/javascript" src="js/axios.min.js"></script>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+    <script type="text/javascript">
+        var products = new Vue({
+            el:'#products',
+            data:{
+                category:'',
+                products:'',
+                loader:true
+            },
+            methods:{
+
+            },
+            computed:{
+
+            },
+            mounted: function() {
+                console.log("mounted");
+                axios.post('http://wowitprojects.com/wowMobile/wowstoreadmin/apis/category_list.php')
+                .then((response)=>{
+                    console.log(response);
+                    this.category = response.data;
+                    console.log(this.category.data);
+                }, (error)=>{
+                    console.log(error);
+                    alert(error)
+                })
+            }
+        })
+
+    jQuery(function($) {
+        // $(".progress").addClass("hide");
+        $(".progress, .overlay").removeClass("hide");
+
+        /*$('.sidenav-trigger').sidenav({
+            edge: 'right'
+        });*/
+
+        var sData = {
+            "sales_person_id": sessionStorage.getItem('sales_person_id')
+        };
+
+        var storesObj; //all stores data as array of objects;
+
+        var currStore = []; //stores registered by salesperson
+
+        // calculate subtotal and update in array
+        var orderItems = [];
+
+        function grandTotal() {
+            var grandtotal = 0;
+            for (var i = orderItems.length - 1; i >= 0; i--) {
+                grandtotal += Number(orderItems[i].subtotal);
+            };
+            // console.log("grandTotal = "+grandtotal);
+            sessionStorage.setItem('gTotal', grandtotal);
+            return grandtotal;
+        }
+
+        function total_Qty() {
+            var totalqty = 0;
+            for (var i = orderItems.length - 1; i >= 0; i--) {
+                totalqty += Number(orderItems[i].product_qty);
+            };
+            console.log("totalQty = " + totalqty);
+            return totalqty;
+        }
+
+        function calcSubtotal(qty, price) {
+            /*var prodQty = $("#itemQty").val();
+            var prodPrice = $("#itemPrice").val();*/
+            var subTotal = (Number(qty) * Number(price)).toFixed(2);
+            // $("#itemSubtotal").val(subTotal);
+            return subTotal;
+        }
+
+        $("#itemList").on('click', '.addCart', function(event) {
+            event.preventDefault();
+            var pid = $(this).data('pid');
+            var price = $(this).data('price');
+            var prodQty = $("#itemQty").val();
+            $("#cartModal").modal('open');
+            $("#itemPrice").val(price);
+            console.log(pid +' -ID- '+ prodQty +' -Qty- '+ price);
+            $("#itemSubtotal").val(calcSubtotal(prodQty, price));
+        });
+
+        $("#itemQty").on('keyup blur', function(e) {
+            var price = $("#itemPrice").val();
+            var prodQty = $(this).val();
+            console.log(prodQty +' - | - '+ price);
+            $("#itemSubtotal").val(calcSubtotal(prodQty, price));
+        });
+
+        /*product list for order*/
+        var prodList = [];
+
+        $("#addCart").on('click', function(e) {
+            var prodId = $(this).data('prod');
+            // var catId = sessionStorage.getItem('catId');
+            var prodQty = $("#itemQty").val();
+            var prodPrice = $(this).data('price');
+            var subTotal = calcSubtotal(prodQty,prodPrice);
+
+            // var totalQty = total_Qty();
+            // var grandPrice = grandTotal();
+
+            $("#itemSubtotal").val(subTotal);
+
+            var itemObj = {};
+
+            for (var i = prodList.length - 1; i >= 0; i--) {
+                // prodList[i]
+                if (prodList[i].product_id == prodId) {
+                    itemObj.item_name = prodList[i].item_name;
+                    itemObj.item_model_no = prodList[i].item_model_no;
+                    itemObj.item_code = prodList[i].item_code;
+                };
+            };
+
+            itemObj.product_id = prodId;
+
+            itemObj.categeory_id = sessionStorage.getItem('catId');
+            itemObj.product_qty = prodQty;
+            itemObj.product_price = prodPrice;
+            itemObj.subtotal = subTotal;
+
+            // console.info(itemObj);
+
+            orderItems[orderItems.length] = itemObj;
+
+            // console.info(orderItems);
+            var cartitem = [];
+            for (var i = 0; i < orderItems.length; i++) {
+                cartitem.push('<ul id="' + orderItems[i].product_id + '" class="collection with-header"><li class="collection-header"><a class="btn-floating small close red lighten-2 right waves-effect"><i class="mdi-close"></i></a><h5 class="pink-text text-darken-2">' + orderItems[i].item_name + '</h5><h6 class="title">' + orderItems[i].category_name + '</h6></li><li class="collection-item row"><div class="col s6"><label>Model No.</label><br>' + orderItems[i].item_model_no + '</div><div class="col s6"><label>Item Code</label><br>' + orderItems[i].item_code + '</div></li><li class="collection-item row"><div class="col s4"><label>Price</label><br>' + orderItems[i].product_price + '</div><div class="col s4"><label>Qty</label><br>' + orderItems[i].product_qty + '</div><div class="col s4"><label>Subtotal</label><br>' + orderItems[i].subtotal + '</div></li></ul>');
+                
+            };
+
+            $('#addItem').modal('close');
+
+            $("#newitems").html(cartitem.join(''));
+            // console.info(orderItems);
+            var grandPrice = grandTotal();
+            $("#cartModal").modal('close');
+        });
+
+        $("#newitems").on('click', 'a.close', function() {
+            var item = $(this).closest('.collection');
+            item.remove();
+            item.attr('id');
+            for (var i = orderItems.length - 1; i >= 0; i--) {
+                if (orderItems[i].product_id == item.attr('id')) {
+                    orderItems.splice([i], 1);
+                }
+            };
+            console.info(orderItems);
+        });
+
+        $("#orderNow").on('click', function() {
+
+            $(".progress, .overlay").removeClass("hide");
+            $(".chip").addClass("hide").html("");
+
+            var orderData = {
+                "sales_person_id": sessionStorage.getItem('sales_person_id'),
+                "store_id": sessionStorage.getItem('store_id'),
+                "total_qty": total_Qty(),
+                "grand_price": grandTotal(),
+                "items": orderItems
+            };
+            console.info(orderData);
+            $.ajax({
+                url: 'http://wowitprojects.com/wowMobile/wowstoreadmin/apis/order.php',
+                type: 'POST',
+                crossDomain: true,
+                data: JSON.stringify(orderData),
+                success: function(result) {
+                    if (result.status == 1) {
+                        $("#modal1 .modal-content").html("<p>" + result.data + "</p>");
+                        $('#modal1').modal('open');
+                        $(".progress, .overlay").addClass("hide");
+                        $(".chip").addClass("hide").html('');
+                    } else {
+                        $(".progress, .overlay").addClass("hide");
+                        $(".chip").removeClass("hide").html(result.error);
+                    };
+                },
+                error: function() {
+                    alert("Some error occured in order API.");
+                    $(".progress, .overlay").addClass("hide");
+                    $(".chip").addClass("hide").html('');
+                }
+            })
+
+        });
+
+    })
+    </script>
+</body>
+
+</html>
