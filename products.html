@@ -52,6 +52,7 @@
                 <a href="#!" class="brand-logo center">Products</a>
                 <ul id="nav-mobile" class="left">
                     <li><a href="#" onclick="window.history.back()"><i class="mdi-arrow_back "></i></a></li>
+                    <li><a href="home.html"><i class="mdi-home "></i></a></li>
                 </ul>
                 <ul class="right">
                     <li><a href="#" v-on:click="showFilter()"><i class="mdi-filter_list"></i></a></li>
@@ -60,31 +61,7 @@
             </div>
         </nav>
         <div class="">
-            <!-- <nav class="nav-extended">
-                <div class="nav-content row">
-                    <div class="col s5">
-                        <i class="mdi mdi-filter_list"></i>
-                        <span>Category</span>
-                        <div class="input-field ">
-                            <select class="browser-default" v-model.lazy="mycat" v-on:change="prodList()">
-                                <option v-for="item in category" v-bind:value="item.category_id">{{item.category_name}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col s5">
-                        <i class="mdi mdi-sort"></i>
-                        <span>Sort</span>
-                        <div class="input-field ">
-                            <select name="sort" id="sort" class="browser-default">
-                                <option value="a-z">Name A-Z</option>
-                                <option value="z-a">Name Z-A</option>
-                                <option value="0-9">Price Low - High</option>
-                                <option value="9-0">Price High - Low</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </nav> -->
+            
         </div>
         <div id="blue" class="content order">
             <div class="pushpin-nav red lighten-4" data-target="blue" v-show="filter" style="width: 100%; z-index: 9;">
@@ -112,8 +89,12 @@
                     </div>
                     <div class="col s2 center-align"><i class="mdi mdi-shopping"></i> Cart
                         <div class="input-field">
-                            
                             <a href="#" data-activates="slide-out" data-target="slide-out" class="sidenav-trigger btn-floating waves-effect waves-light red"><span class=" red-text text-lighten-4">{{orderItems.length}}</span></a>
+                        </div>
+                    </div>
+                    <div class="col s10">
+                        <div class="input-field">
+                            <input type="text" v-model="search" placeholder="Search" class="grey lighten-5">
                         </div>
                     </div>
                 </div>
@@ -144,7 +125,7 @@
                             </ul>
                         </div>
                         <div class="card-action">
-                            <button class="waves-effect waves-light btn btn-block green lighten-1 " v-bind:data-id="item.product_id" v-bind:data-price="item.item_cost" v-if="item.item_available_qty > 0 && item.item_cost > 0" v-on:click="addtoOrderlist($event)"><i class="mdi-add_shopping_cart"></i></button>
+                            <button class="waves-effect waves-light btn btn-block green lighten-1 " v-bind:data-id="item.product_id" v-bind:data-price="item.item_cost" v-bind:data-code="item.item_code" v-bind:data-avail="item.item_available_qty" v-if="item.item_available_qty > 0 && item.item_cost > 0" v-on:click="addtoOrderlist($event)"><i class="mdi-add_shopping_cart"></i></button>
                             <!-- <p class="center-align grey-text " style="margin: 6px 0;" v-else-if="item.item_cost == '0.00'"><i class="mdi-highlight_off"></i> Not available</p> -->
                             <p class="center-align grey-text " style="margin: 6px 0;" v-else-if="item.status!='enabled'"><i class="mdi-highlight_off"></i> Not available</p>
                             <p class="center-align grey-text " style="margin: 6px 0;" v-else><i class="mdi-remove_shopping_cart"></i> Not available</p>
@@ -161,20 +142,7 @@
                 <li class="waves-effect"><a href="#!">5</a></li>
                 <li class="waves-effect"><a href="#!"><i class="mdi-chevron_right"></i></a></li>
             </ul> -->
-            <!-- <form id="itemsForm" class="input-group hide">
-            <div class="form-background">
-                <div id="newitems">
-                </div>
-                <p class="center-align">Add Item
-                    <br><a href="#addItem" class="btn-floating btn-large green waves-effect"><i class="mdi-add"></i> Add Item</a></p>
-            </div>
-            <div class="footer-button">
-                <div class="input-field">
-                    <button type="button" id="orderNow" class="btn btn-large btn-block waves-effect red darken-4">Order Now</button>
-                </div>
-                <div class="input-field"><a href="home.html" class="btn btn-large btn-block waves-effect green">Back</a></div>
-            </div>
-        </form> -->
+            
         </div>
         <!-- Modal Structure -->
         <div id="cartModal" class="modal bottom-sheet">
@@ -190,14 +158,20 @@
                         </div>
                         <div class="col s3" style="padding-left: 0;">
                             <div class="input-field">
-                                <input type="number" name="itemQty" id="itemQty" v-model="itemQty" value="1" min="1">
-                                <label for="itemQty" class="active">QTY</label>
+                                <input type="number" name="itemQty" id="itemQty" v-model.lazy="itemQty" value="1" min="1" >
+                                <label for="itemQty" class="active">QTY </label>
+                                
                             </div>
                         </div>
                         <div class="col s5" style="padding: 0;">
                             <div class="input-field">
                                 <input type="text" name="itemSubtotal" id="itemSubtotal" readonly="" v-bind:value="subtotal">
                                 <label for="itemSubtotal" class="active">Subtotal</label>
+                            </div>
+                        </div>
+                        <div class="col s12" style="padding: 0">
+                            <div class="input-field" style="margin: -15px 0 0;">
+                                <span class="helper-text" >Available QTY {{itemAvail}}</span>
                             </div>
                         </div>
                     </div>
@@ -218,11 +192,11 @@
                     <p class="white-text"> Order List</p>
                 </div>
             </li>
-            <li><a class="subheader">Items (<span class="blue-text">{{orderItems.length}}</span>) &mdash; QTY (<span class="blue-text">{{totalQty}}</span>) &mdash; Grand Total (<span class="blue-text ">{{grandTotal}}</span>)</a></li>
+            <li><a class="subheader">Items <span class="blue-text">{{orderItems.length}}</span> &mdash; QTY <span class="blue-text">{{totalQty}}</span> &mdash; G Total <span class="blue-text ">{{grandTotal}}</span></a></li>
             <li>
                 <div class="divider"></div>
             </li>
-            <li v-for="(item, index) in orderItems" v-bind:key="item.product_id"><a href="#" class="waves-effect"><i class="mdi-widgets blue-text lighten-2"></i>{{item.product_price}} x {{item.product_qty}} = {{item.subtotal}} <i class="small mdi-close red-text right" v-on:click="remove(index)"></i></a></li>
+            <li v-for="(item, index) in orderItems" v-bind:key="item.product_id"><a href="#" ><span class="blue-text">{{item.prod_code}}</span> - {{item.product_price}} x {{item.product_qty}} = {{item.subtotal}} <i class="small mdi-close red-text right" v-on:click="remove(index)"></i></a></li>
             <li>
                 <div class="divider"></div>
             </li>
@@ -271,14 +245,17 @@
             category: [],
             mycat: '',
             sort:'',
+            search:'',
             products: [],
             imgpath: 'http://wowitprojects.com/wowMobile/images/test_pic/',
             noimage: 'http://wowitprojects.com/wowMobile/wowapp/images/placeholder-400x300.jpg',
             loader: true,
             modal: false,
             prodId: '',
+            prodCode:'',
             itemPrice: 0.5,
             itemQty: 1,
+            itemAvail:'',
             itemSubtotal: 0,
             orderItems: [],
             totalqty: 0,
@@ -361,27 +338,45 @@
                         alert(error);
                     })
             },
+            /*itemQtyValidate: function() {
+                if (this.itemQty > this.itemAvail) {
+                    alert("Qty should not be more than available qty.");
+                    this.itemQty = this.itemAvail;
+                    return this.itemQty;
+                }
+            },*/
             addtoOrderlist: function(e) {
                 /*var id = e.target.getAttribute('data-id');
                 var price = e.target.getAttribute('data-price');*/
                 var id = $(e.target).data('id');
+                var code = $(e.target).data('code');
                 var price = $(e.target).data('price');
+                var avail = $(e.target).data('avail');
                 this.prodId = id;
+                this.prodCode = code;
                 this.itemPrice = price;
+                this.itemAvail = avail;
                 $("#cartModal").modal('open');
             },
             addToOrders: function() {
                 var prodObj = {
                     "categeory_id": this.mycat,
                     "product_id": this.prodId,
+                    "prod_code": this.prodCode,
                     "product_qty": this.itemQty,
                     "product_price": this.itemPrice,
                     "subtotal": this.itemSubtotal
                 };
-                this.orderItems.push(prodObj);
-                // console.log(this.orderItems);
-                $("#cartModal").modal('close');
-                M.toast({html: 'Item added successfully!'});
+                if (this.itemQty > this.itemAvail) {
+                    alert("Qty should not be more than "+this.itemAvail);
+                    this.itemQty = this.itemAvail;
+                    // return this.itemQty;
+                }else{
+                    this.orderItems.push(prodObj);
+                    // console.log(this.orderItems);
+                    $("#cartModal").modal('close');
+                    M.toast({html: 'Item added successfully!'});
+                }
             },
             remove: function(index) {
                 this.orderItems.splice(index, 1);
@@ -399,6 +394,7 @@
                     if (result.data.status == 1) {
                         alert(result.data.data);
                         this.orderItems = [];
+                        window.location.assign('orderhistory.html');
                     } else {
                         alert(result.data.data);
                     }
