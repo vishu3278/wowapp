@@ -23,7 +23,7 @@ body {
 .container {
     margin: 15px auto;
 }
-nav .brand-logo { font-size: 1.5em; }
+nav .brand-logo { font-size: 1.325em; }
 nav .sidenav-trigger { margin: 0 ; }
 .nav-wrapper ul a .badge { position: absolute; top: 6px; right: 4px; line-height: normal; }
 .no-padding { padding: 0;}
@@ -84,8 +84,7 @@ nav .sidenav-trigger { margin: 0 ; }
 }
 
 .form-background {
-    padding: 10px 5px 15px;
-    margin-bottom: 15px;
+    padding: 5px 0;
 }
 
 .form-background fieldset {
@@ -117,7 +116,7 @@ nav .sidenav-trigger { margin: 0 ; }
     height: 35px;
     box-shadow: none;
     border: none;
-    border-bottom: 1px solid #993366;
+    border-bottom: 2px solid #4caf50;
     background: none;
     font-family: 'Roboto', sans-serif;
 }
@@ -125,7 +124,7 @@ nav .sidenav-trigger { margin: 0 ; }
     -webkit-appearance: none;
     -moz-appearance: none;
     background: url(../images/arrow-down.png) no-repeat 98% 50%;
-    -webkit-background-size: 32px;
+    -webkit-background-size: 16px;
     background-size: 32px;
     font-size: 1em;
 }
@@ -207,7 +206,7 @@ select.browser-default { color: #666; }
 
 #itemList .card { font-size: 14px; margin-left: -8px; margin-right: -8px; margin-bottom: 0.5em; }
 #itemList .card .card-image { height: 200px; background-position: center; background-size: cover; /* min-height: 35%; */ }
-#itemList .card .card-title { font-size: 16px; padding: 10px; }
+#itemList .card .card-title { font-size: 16px; padding: 5px 10px; margin: 0; }
 #itemList .card .card-action { padding: 0; }
 #itemList .card .collection-item { line-height: 1.2; }
 #itemList .card .collection-item .row { margin-bottom: 0; }
@@ -215,6 +214,7 @@ select.browser-default { color: #666; }
 
 .pushpin-nav .row .col { padding-left: 4px; padding-right: 2px; }
 .pushpin-nav .input-field { margin: 5px 0; }
+.pushpin-nav .input-field input {  }
 
 @media screen and (max-width: 600px){
     #itemList .card .card-image { height: 160px; }
