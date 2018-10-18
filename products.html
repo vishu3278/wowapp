@@ -126,15 +126,15 @@
                                     <br>{{item.item_description}}</li>
                                 <li class="collection-item row">
                                     <div class="col s6"><small class=" grey-text">Price </small>
-                                        <br>{{item.item_cost}}</div>
+                                        <br>{{item.item_priceA}}</div>
                                     <div class="col s6"><small class=" grey-text">Avail Qty </small>
                                         <br>{{item.item_available_qty}}</div>
                                 </li>
                             </ul>
                         </div>
                         <div class="card-action">
-                            <button class="waves-effect waves-light btn btn-block green lighten-1 " v-bind:data-id="item.product_id" v-bind:data-price="item.item_cost" v-bind:data-code="item.item_code" v-bind:data-avail="item.item_available_qty" v-bind:data-ctn="item.item_ctn" v-if="item.item_available_qty > 0 && item.item_cost > 0" v-on:click="addtoOrderlist($event)"><i class="mdi-add_shopping_cart"></i></button>
-                            <!-- <p class="center-align grey-text " style="margin: 6px 0;" v-else-if="item.item_cost == '0.00'"><i class="mdi-highlight_off"></i> Not available</p> -->
+                            <button class="waves-effect waves-light btn btn-block green lighten-1 " v-bind:data-id="item.product_id" v-bind:data-price="item.item_priceA" v-bind:data-code="item.item_code" v-bind:data-avail="item.item_available_qty" v-bind:data-ctn="item.item_ctn" v-if="item.item_available_qty > 0 && item.item_priceA > 0" v-on:click="addtoOrderlist($event)"><i class="mdi-add_shopping_cart"></i></button>
+                            <!-- <p class="center-align grey-text " style="margin: 6px 0;" v-else-if="item.item_priceA == '0.00'"><i class="mdi-highlight_off"></i> Not available</p> -->
                             <p class="center-align grey-text " style="margin: 6px 0;" v-else-if="item.status!='enabled'"><i class="mdi-highlight_off"></i> Not available</p>
                             <p class="center-align grey-text " style="margin: 6px 0;" v-else><i class="mdi-remove_shopping_cart"></i> Not available</p>
                         </div>
@@ -179,7 +179,7 @@
                         </div>
                         <div class="col s12" style="padding: 0">
                             <div class="input-field" style="margin: -15px 0 0;">
-                                <span class="helper-text" >Available QTY {{itemAvail}} &mdash; Carton(s) {{itemCTN}}</span>
+                                <span class="helper-text" >Available QTY {{itemAvail}} &mdash; 1 carton contains {{itemCTN}} pieces</span>
                             </div>
                         </div>
                     </div>
