@@ -8,6 +8,7 @@
     <!-- <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons" > -->
     <link rel="stylesheet" href="css/material-icons.css">
     <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
     <link rel="stylesheet" href="css/mobile.css">
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
@@ -45,8 +46,10 @@
         <div id="storelist">
         </div>
     </div>
+    <script type="text/javascript" src="js/jquery.magnific-popup.min.js"></script>
     <script type="text/javascript">
     jQuery(function($) {
+        
         // $(".progress").addClass("hide");
         $(".progress, .overlay").removeClass("hide");
 
@@ -78,12 +81,13 @@
                         } else {
                             pimg = 'images/logo.png';
                         };
-                        stores.append('<ul class="collection"><li class="collection-item row"><div class="col s4"><img src="' + pimg + '" class="responsive-img" alt="img"></div><div class="col s8"><h6>' + sdata[i].product_name + '</h6><p>' + sdata[i].product_categeory + '</p>' + sdata[i].product_model_no + '<br>' + sdata[i].product_code + '</div></li><li class="collection-item row"><div class="col s4"><label>Price</label><br>' + sdata[i].product_price + '</div><div class="col s4"><label>Qty</label><br>' + sdata[i].product_qty + '</div><div class="col s4"><label>Subtotal</label><br>' + sdata[i].subtotal + '</div></li></ul>');
+                        stores.append('<ul class="collection"><li class="collection-item row"><div class="col s4"><a href="' + pimg + '" class="image-link"><img src="' + pimg + '" class="responsive-img" alt="img"></a></div><div class="col s8"><h6>' + sdata[i].product_name + '</h6><p>' + sdata[i].product_categeory + '</p>' + sdata[i].product_model_no + '<br>' + sdata[i].product_code + '</div></li><li class="collection-item row"><div class="col s4"><label>Price</label><br>' + sdata[i].product_price + '</div><div class="col s4"><label>Qty</label><br>' + sdata[i].product_qty + '</div><div class="col s4"><label>Subtotal</label><br>' + sdata[i].subtotal + '</div></li></ul>');
                     };
 
                     // window.location.assign("home.html");
                     $("#storelist").html(stotal).append(stores);
                     $(".progress, .overlay").addClass("hide");
+                    $('.image-link').magnificPopup({type:'image'});
                 } else {
                     // alert(result.status);
                     $(".progress, .overlay").addClass("hide");
