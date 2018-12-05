@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="css/material-icons.css">
     <link rel="stylesheet" type="text/css" href="css/pignose.calendar.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
     <link rel="stylesheet" href="css/mobile.css">
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
@@ -116,8 +117,9 @@
                 <!-- <div class="col s6 m4"></div> -->
                 <div class="col s6 m4 l3" v-for="item in products" v-bind:id="item.product_id">
                     <div class="card medium">
-                        <div class="card-image" v-bind:style="{backgroundImage: 'url('+(item.item_image?imgpath+item.item_image:noimage)+')' }">
-                            <!-- <img class="responsive-img" v-bind:src="(item.item_image?imgpath+item.item_image:noimage)" v-bind:alt="item.item_image" data-caption="item.item_description"> --><span class="card-title red-text">{{item.item_name}}</span></div>
+                        <a class="card-image" style="display: block;" v-bind:href="imgpath+item.item_image" v-bind:style="{backgroundImage: 'url('+(item.item_image?imgpath+item.item_image:noimage)+')' }">
+                            <!-- <img class="responsive-img" v-bind:src="(item.item_image?imgpath+item.item_image:noimage)" v-bind:alt="item.item_image" data-caption="item.item_description"> --><span class="card-title red-text">{{item.item_name}}</span>
+                        </a>
                         <div class="card-content">
                             <ul class="">
                                 <li class="collection-item"><small class="grey-text">Item Code </small>{{item.item_code}}</li>
@@ -239,6 +241,7 @@
             </ul> -->
         </div>
     </div>
+    <script type="text/javascript" src="js/jquery.magnific-popup.min.js"></script>
     <script type="text/javascript" src="js/products.js"></script>
     <script type="text/javascript" src="js/axios.min.js"></script>
     <script type="text/javascript" src="js/vue.min.js"></script>
@@ -275,24 +278,30 @@
             console.log("mounted");
             /*get categories*/
             axios.post('http://wowitprojects.com/wowMobile/wowstoreadmin/apis/category_list.php')
-                .then((response) => {
-                    // console.log(response);
-                    this.category = response.data.data;
-                    // console.log(this.category);
-                    this.loader = false;
-                    this.mycat = 9;
-                    this.prodList();
-                }, (error) => {
-                    console.log(error);
-                    alert(error)
-                });
+            .then((response) => {
+                // console.log(response);
+                this.category = response.data.data;
+                // console.log(this.category);
+                this.loader = false;
+                this.mycat = 9;
+                this.prodList();
+            }, (error) => {
+                console.log(error);
+                alert(error)
+            });
 
             /*get stores*/
             axios.post('http://wowitprojects.com/wowMobile/wowstoreadmin/apis/store_list.php')
-                .then((result) => {
-                    // console.log(result.data);
-                    this.stores = result.data.data;
-                }, (error) => {})
+            .then((result) => {
+                // console.log(result.data);
+                this.stores = result.data.data;
+            }, (error) => {});
+            /*popup*/
+        },
+        updated: function() {
+            console.log(" updated");
+            $('.card-image').magnificPopup({type:'image'});
+            /*this.attachImagePopup();*/
         },
         computed: {
             subtotal: function() {
@@ -365,7 +374,7 @@
                 this.message = '';
                 axios.post('http://wowitprojects.com/wowMobile/wowstoreadmin/apis/product_list.php', { "categeory_id": this.mycat, "sort":this.sort, "filterBy":this.search })
                     .then((result) => {
-                        console.log(result.data.total);
+                        /*console.log(result.data.total);*/
                         if (result.data.status == 1) {
                             this.products = result.data.data;
                             this.loader = false;
